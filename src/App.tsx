@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import Home from './pages/Home';
-import OneProduct from './pages/OneProduct';
-import Cart from './pages/Cart';
+import Home from './pages/home';
+import OneProduct from './pages/product';
+import Cart from './pages/cart';
 
 function App() {
   return (

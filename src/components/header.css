@@ -1,8 +1,0 @@
-/* header.css */
-.header {
-    background-color: var(--color-link-primary);
-}
-
-.header__title {
-    color: var(--color-text-primary);
-}

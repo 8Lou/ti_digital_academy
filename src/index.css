@@ -62,14 +62,21 @@
   font-display: swap;
 }
 
-a {
-
+a, ul {
+  list-style: none;
+  text-decoration: none; 
 }
 
 a:hover {
+  text-decoration: underline; 
 }
 
 body {
+  width: 100%;
+  max-width: 1440px; 
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -86,4 +93,18 @@ button:hover {
 
 button:focus,
 button:focus-visible {
+}
+
+@media (max-width: 768px) {
+  body {
+      width: 100%;
+      padding: 0 16px; 
+  }
+}
+
+@media (max-width: 370px) {
+  body {
+      width: 100%; 
+      padding: 0 8px; 
+  }
 }

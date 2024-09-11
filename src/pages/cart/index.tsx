@@ -1,5 +1,5 @@
 import React from 'react';
-import usePageTitle from '../hooks/usePageTitle';
+import usePageTitle from '../../hooks/usePageTitle';
 
 const Cart: React.FC = () => {
   usePageTitle('My cart | Goods4you');
