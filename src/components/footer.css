@@ -1,0 +1,8 @@
+/* footer.css */
+.footer {
+    background-color: var(--color-link-primary);
+}
+
+.footer__title {
+    color: var(--color-text-primary);
+}

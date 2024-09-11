@@ -1,0 +1,8 @@
+/* Main.css */
+.main {
+    background-color: var(--color-link-primary);
+  }
+  
+  .main__title {
+      color: var(--color-text-primary);
+  }

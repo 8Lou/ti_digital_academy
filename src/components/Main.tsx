@@ -1,6 +1,11 @@
 import React from 'react';
+import './main.css';
 
 const Main: React.FC = () => {
-  return <h1>Main!</h1>;
+  return (
+    <main className="main">
+      <h1 className="main__title">Main!</h1>
+    </main>
+  );
 };
 export default Main;
