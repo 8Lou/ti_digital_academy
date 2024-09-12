@@ -7,6 +7,7 @@
   --color-text-primary: rgba(68, 75, 88, 1);
   --color-text-secondary: rgba(109, 114, 123, 1);
   --color-background-primary: rgba(72, 66, 131, 1);
+  --color-background-secondary: rgba(246, 246, 246, 1);
   --color-link-primary: rgba(255, 255, 255, 1);
   --color-link--primary-hover: rgba(213, 213, 213, 1);
   --color-link-secondary: rgba(178, 181, 187, 1);
@@ -83,8 +84,29 @@ a:hover {
   text-decoration: underline; 
 }
 
-h1 {
 
+h1 {
+  font-size: var(--font-size-3xl); /* 36px */
+}
+
+h2 {
+  font-size: var(--font-size-2xl); /* 30px */
+}
+
+h3 {
+  font-size: var(--font-size-xl); /* 24px */
+}
+
+h4 {
+  font-size: var(--font-size-l); /* 18px */
+}
+
+h5 {
+  font-size: var(--font-size-m); /* 16px */
+}
+
+h6 {
+  font-size: var(--font-size-s); /* 14px */
 }
 
 .button {

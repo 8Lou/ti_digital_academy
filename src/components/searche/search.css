@@ -1,0 +1,10 @@
+/* search.css */
+.input {
+  font-size: var(--font-size-m);
+  color: var(--color-background-primary);
+  background-color: var(--color-background-secondary);
+  height: 3.8rem;
+  width: 100%;
+  padding: 20px;
+  border: none;
+}

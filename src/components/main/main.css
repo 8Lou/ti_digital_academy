@@ -1,16 +1,20 @@
 /* main.css */
 .main {
-  }
-  
-  .block__up {
-      color: var(--color-background-primary);
-      position: relative;
-      height: 500px;
-    width: 100%;
-  }
-  .block__down {
-    /* width: calc(100% - 130px); */
-    min-height: auto;
-    margin: 48px 130px; /* Центрируем блок по горизонтали */
-    background-color: lightcoral; /* Цвет для второго блока */
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1180px;
+}
+
+.block__up {
+  color: var(--color-background-primary);
+  position: relative;
+  height: 500px;
+  width: 100%;
+}
+
+.block__down {
+  min-height: auto;
+  margin: 48px 130px;
+  background-color: lightcoral;
+}

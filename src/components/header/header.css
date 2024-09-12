@@ -1,7 +1,6 @@
 /* header.css */
 .header {
     display: flex;
-    /* align-items: center; */
     color: var(--color-text-primary);
     background-color: var(--color-background-primary);
     height: 6rem;
