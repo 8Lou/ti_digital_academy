@@ -1,0 +1,16 @@
+/* button.css */
+.button {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.button__tytle {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+.button__text {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-semibold);
+}

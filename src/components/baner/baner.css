@@ -1,0 +1,16 @@
+/* baner.css */
+.baner {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.baner__tytle {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-regular);
+}
+
+.baner__text {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-semibold);
+}

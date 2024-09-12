@@ -1,0 +1,9 @@
+/* сard.css */
+.card {
+  background-color: var(--color-link-primary);
+  border: 1px solid var(--color-link--primary-hover);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px var(--color-text-secondary);
+  height: 23.13rem;
+  width: 23.13rem;
+}
