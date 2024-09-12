@@ -62,21 +62,25 @@
   font-display: swap;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 a, ul {
   list-style: none;
   text-decoration: none; 
-}
-
-a:hover {
-  text-decoration: underline; 
 }
 
 body {
   width: 100%;
   max-width: 1440px; 
   height: 100vh;
-  margin: 0;
-  padding: 0;
+}
+
+a:hover {
+  text-decoration: underline; 
 }
 
 h1 {

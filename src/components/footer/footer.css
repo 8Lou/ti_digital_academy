@@ -1,8 +1,53 @@
 /* footer.css */
 .footer {
-    background-color: var(--color-link-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-primary);
+    background-color: var(--color-text-primary);
+    height: 6rem;
+    min-width: 100vw;
+    max-width: 1440px;
+    position: fixed;
+    padding: 23px 130px;
+    bottom: 0;
+    z-index: 1;
 }
 
-.footer__title {
-    color: var(--color-text-primary);
+.footer__nav {
+    display: flex;
+    justify-content: flex-end;    
+    gap: 40px;
 }
+
+a {
+    color: var(--color-link-primary);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+    }
+    .footer__nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .footer {
+      padding: 0 60px;
+    }
+    .footer__nav {
+      gap: 20px;
+    }
+  }
+  
+  @media (min-width: 1025px) {
+    .footer {
+      padding: 0 130px;
+    }
+    .footer__nav {
+      gap: 40px;
+    }
+  }

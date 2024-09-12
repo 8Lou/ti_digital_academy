@@ -1,10 +1,15 @@
 import React from 'react';
 import './footer.css';
+import Logo from '../logo/Logo';
 
 const Footer: React.FC = () => {
     return (
         <footer className="footer">
-            <h1 className="footer__title">Footer!</h1>
+                <Logo />
+                <nav className="footer__nav">
+                    <a href="#home">Catalog</a>
+                    <a href="#about">FAQ</a>
+                </nav>
         </footer>
     );
 };

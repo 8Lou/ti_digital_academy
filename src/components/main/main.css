@@ -1,8 +1,16 @@
 /* main.css */
 .main {
-    background-color: var(--color-link-primary);
   }
   
-  .main__title {
-      color: var(--color-text-primary);
+  .block__up {
+      color: var(--color-background-primary);
+      position: relative;
+      height: 500px;
+    width: 100%;
+  }
+  .block__down {
+    /* width: calc(100% - 130px); */
+    min-height: auto;
+    margin: 48px 130px; /* Центрируем блок по горизонтали */
+    background-color: lightcoral; /* Цвет для второго блока */
   }
