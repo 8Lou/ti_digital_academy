@@ -3,15 +3,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 1180px;
-  
+  /* position: relative; */
+  margin-top: 25px;
 }
 
 .block__up {
+  display: flex;
   height: 500px;
   width: 100%;
   color: var(--color-link-primary);
-  padding: 115px 130px;
+  padding: 0 130px;
 }
 
 .block__down {

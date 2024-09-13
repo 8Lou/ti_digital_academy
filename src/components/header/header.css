@@ -5,7 +5,6 @@
     background-color: var(--color-background-primary);
     height: 6rem;
     min-width: 100vw;
-    max-width: 1440px;
     position: fixed; 
     top: 0;
     z-index: 1;

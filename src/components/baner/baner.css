@@ -2,11 +2,15 @@
 .baner {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.9rem;
+  padding: 115px 0; 
 }
 
 .baner__tytle {
   color: var(--color-link-primary);
+}
+
+h1 {
   font-weight: var(--font-weight-regular);
 }
 

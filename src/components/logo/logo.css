@@ -2,4 +2,5 @@
 .logo__title {
     color: var(--color-link-primary);
     font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
 }
