@@ -27,7 +27,7 @@ const Main: React.FC = () => {
         <Baner />
       </div>
       <div className="block__midle">
-        <h1>Catalog</h1>
+        <h1 className='catalog'>Catalog</h1>
         <Search onSearch={handleSearch} />
         <div className="card-grid">
           {cardsData.map((card, index) => (

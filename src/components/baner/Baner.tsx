@@ -12,7 +12,7 @@ const Baner: React.FC = () => {
         <div className='baner'>
             <h1 className='baner__title'>Any products from famous brands <br /> with worldwide delivery</h1>
             <h6 className='baner__text'>We sell smartphones, laptops, clothes, shoes <br /> and many other products at low prices</h6>
-            <Button label="Go to shopping" onClick={handleClick} />
+            <Button className='button' label="Go to shopping" onClick={handleClick} />
         </div>
     );
 };

@@ -24,7 +24,6 @@
   --font-size-3xl: 2.25rem; /* 36px */
 
   --line-height-base: 1.5;
-  --padding-button: 0.6em 1.2em;
   --border-radius-button: 4px;
   
   text-rendering: optimizeLegibility;
@@ -113,7 +112,8 @@ h6 {
   font-size: var(--font-size-s); /* 14px */
 }
 
-.button {
+.button,
+.input {
   cursor: pointer;
 }
 
@@ -121,6 +121,13 @@ button:hover {
   background-color: var(--color-button-background-hover);
 }
 
+.input:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+  -webkit-box-shadow: none;
+  -webkit-border: none;
+}
 @media (max-width: 768px) {
   body {
       width: 80%;

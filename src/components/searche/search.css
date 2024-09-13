@@ -3,6 +3,7 @@
   font-size: var(--font-size-m);
   color: var(--color-background-primary);
   background-color: var(--color-background-secondary);
+  border-radius: 4px;
   height: 3.8rem;
   width: 100%;
   padding: 20px;

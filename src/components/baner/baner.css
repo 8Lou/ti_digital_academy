@@ -6,7 +6,7 @@
   padding: 115px 0; 
 }
 
-.baner__tytle {
+.baner__title {
   color: var(--color-link-primary);
 }
 
@@ -17,4 +17,8 @@ h1 {
 .baner__text {
   color: var(--color-link-primary);
   font-weight: var(--font-weight-semibold);
+}
+
+.button{
+  padding: 1.25rem 3.13rem;
 }
