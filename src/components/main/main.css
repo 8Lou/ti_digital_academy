@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: center;
   /* position: relative; */
-  margin-top: 25px;
+  margin-top: 1.6rem;
+  padding-bottom: 6rem;
 }
 
 .block__up {
@@ -15,10 +16,17 @@
   padding: 0 130px;
 }
 
-.block__down {
+.block__midle {
   display: flex;
   flex-direction: column;
   min-height: auto;
-  margin: 48px 130px;
-  background-color: var(--color-link-primary);
+  padding: 48px 130px;
+background-color: var(--color-link-primary);
+}
+.block__down {
+  display: flex;
+  height: 508px;
+  width: 100%;
+  color: var(--color-link-primary);
+  padding: 0 280px;
 }

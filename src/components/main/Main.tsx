@@ -3,6 +3,7 @@ import './main.css';
 import Search from '../searche/Search';
 import Card from '../card/Card';
 import Baner from '../baner/Baner';
+import Faq from '../faq/Faq';
 
 const Main: React.FC = () => {
   const handleSearch = (query: string) => {
@@ -25,7 +26,7 @@ const Main: React.FC = () => {
       <div className="block__up">
         <Baner />
       </div>
-      <div className="block__down">
+      <div className="block__midle">
         <h1>Catalog</h1>
         <Search onSearch={handleSearch} />
         <div className="card-grid">
@@ -33,6 +34,10 @@ const Main: React.FC = () => {
             <Card key={index} title={card.title} description={card.description} />
           ))}
         </div>
+      </div>
+
+      <div className="block__down">
+        <Faq />
       </div>
     </main>
   );
