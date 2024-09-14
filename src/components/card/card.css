@@ -69,3 +69,27 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media screen and (max-width: 1024px) {
+  .card {
+    margin: 0 1%; 
+  }
+  .card:nth-child(2n) { 
+    margin-right: 0; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    margin: 0 1%; 
+  }
+  .card:nth-child(2n) { 
+    margin-right: 0; 
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    margin-right: 0; 
+  }
+}

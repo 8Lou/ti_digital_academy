@@ -9,6 +9,7 @@
 
 .faq__title{
   padding-bottom: 20px;
+  font-weight: var(--font-weight-bold);
 }
 .faq__item,
 .faq__title {
@@ -25,6 +26,7 @@
 .answer{
   padding: 20px 0 0;
   white-space: pre-wrap; 
+  font-weight: var(--font-weight-semibold);
 }
 .faq__header {
   display: flex;
@@ -33,17 +35,19 @@
   flex-wrap: wrap;
 }
 
-h1 {
-  font-weight: var(--font-weight-bold);
-}
-h3 {
+.question {
   font-weight: var(--font-weight-regular);
 }
 
-h5 {
-  font-weight: var(--font-weight-semibold);
+@media (max-width: 768px) {
+  .faq {
+    max-width: 400px;
+height: fit-content;
+  }
 }
 
-h1, h3, h5 {
-  word-wrap: break-word;
+@media (min-width: 769px) and (max-width: 1024px) {
+  .faq {
+    max-width: 600px;
+  }
 }

@@ -8,9 +8,6 @@
 
 .baner__title {
   color: var(--color-link-primary);
-}
-
-h1 {
   font-weight: var(--font-weight-regular);
 }
 

@@ -15,11 +15,11 @@ const accordionData: AccordionItem[] = [
   },
   {
     question: 'What payment methods do you accept?',
-    answer: '0000',
+    answer: 'After placing your order, you will receive a confirmation email containing your order number and a tracking link. You can also log in to your account on our website and go to the "My Orders" section to track your delivery status.',
   },
   {
     question: 'How can I return or exchange an item?',
-    answer: '00000',
+    answer: 'After placing your order, you will receive a confirmation email containing your order number and a tracking link. You can also log in to your account on our website and go to the "My Orders" section to track your delivery status.',
   },
 ];
 
@@ -38,7 +38,7 @@ const FAQ: React.FC = () => {
           <div className='faq__header'
             onClick={() => toggleAccordion(index)}
           >
-            <h3 className=''>{item.question}</h3>
+            <h3 className='question'>{item.question}</h3>
             <img 
               src={openIndex === index ? closeIcon : plusIcon} 
               alt={openIndex === index ? 'Close' : 'Expand'} 
