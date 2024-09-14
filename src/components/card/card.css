@@ -7,14 +7,16 @@
   border-radius: 0.38rem;
   height: 370px;
   width: 370px;
-  position: relative; 
+  position: relative;
 }
+
 .card__image-container {
-  position: relative; 
+  position: relative;
   width: 100%;
   height: 100%;
 }
-.card__content{
+
+.card__content {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -22,13 +24,16 @@
   padding-top: 1px;
   font-size: var(--font-size-m);
 }
+
 .card__image {
-  transition: filter 0.3s ease; 
+  transition: filter 0.3s ease;
 }
+
 .card:hover .card__image {
   background-color: rgba(213, 213, 213, 0.5);
   opacity: 0.5;
 }
+
 .card__overlay {
   position: absolute;
   top: 0;
@@ -42,52 +47,80 @@
   color: rgba(255, 255, 255, 0.8);
   font-size: 26px;
   font-weight: 900;
-  opacity: 0; 
+  opacity: 0;
   transition: opacity 0.3s ease;
 }
+
 .card:hover {
   box-shadow: 0 8px 10px rgba(213, 213, 213, 0.5);
 }
+
 .card:hover .card__overlay {
   opacity: 1;
   z-index: 1;
 }
 
-.card__title{
+.card__title {
   font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
-.card__title:hover{
-  text-decoration:underline; 
+.card__title:hover {
+  text-decoration: underline;
 }
-.price{
+
+.price {
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-primary);
 }
-.card__button{
+
+.cart__button {
   display: flex;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;  
+}
+
+.cart__count {
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: var(--font-size-m);
+  padding: 15px 0;
+  margin: 0 10px;
+  width: fit-content; */
+  padding: 15px 26px; 
 }
 
 @media screen and (max-width: 1024px) {
   .card {
-    margin: 0 1%; 
+    margin: 0 1%;
   }
-  .card:nth-child(2n) { 
-    margin-right: 0; 
+
+  .card:nth-child(2n) {
+    margin-right: 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .card {
-    margin: 0 1%; 
+    margin: 0 1%;
   }
-  .card:nth-child(2n) { 
-    margin-right: 0; 
+
+  .card:nth-child(2n) {
+    margin-right: 0;
   }
 }
 
 @media screen and (max-width: 320px) {
   .card {
-    margin-right: 0; 
+    margin-right: 0;
   }
 }

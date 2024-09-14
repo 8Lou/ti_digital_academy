@@ -25,7 +25,6 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
                 onChange={handleInputChange} 
                 placeholder="Search by title" 
             />
-            {/* <button onClick={handleSearch}>Search</button> */}
         </div>
     );
 };

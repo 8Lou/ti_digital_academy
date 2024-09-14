@@ -5,9 +5,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onClick: () => void;
   disabled?: boolean;
+  children?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, disabled, type = 'button', ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick, disabled, type = 'button', children, ...rest }) => {
   return (
     <button
       type={type}
@@ -16,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({ label, onClick, disabled, type = 'butto
       disabled={disabled}
       {...rest}
     >
+      {children}
       {label}
     </button>
   );

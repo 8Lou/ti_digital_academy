@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './card.css';
+import Button from '../button/Button';
 
 interface CardProps {
     title: string;
@@ -7,6 +8,24 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, description }) => {
+
+    const [count, setCount] = useState(0);
+    const [showButtons, setShowButtons] = useState(false);
+
+    const handleIncrement = () => {
+        setCount(count + 1);
+    };
+
+    const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    };
+
+    const handleClick = () => {
+        setShowButtons(true);
+    };
+
     return (
         <div className="card">
 
@@ -21,11 +40,26 @@ const Card: React.FC<CardProps> = ({ title, description }) => {
                     <p className='price'>{description}</p>
                 </div>
 
-                <button className='card__button'><img src="src\assets\img\Cart.svg" alt="Кнопка Корзина" /></button>
+
+                {showButtons ? (
+                    <div className="buttons-container">
+                        <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
+                        <img src="src\assets\img\Cart-minus.svg" alt="Минус" />
+                        </Button>
+                        <span className="cart__count">{count}item</span>
+                        <Button className="button__cart-plus" onClick={handleIncrement} label={''}>
+                        <img src="src\assets\img\Cart-plus.svg" alt="Плюс" />
+                        </Button>
+                    </div>
+                ) : (
+                    <Button className='cart__button' onClick={handleClick} label={''}>
+                        <img src="src\assets\img\Cart.svg" alt="Кнопка Корзина" />
+                    </Button>
+                )}
             </div>
-            
         </div>
     );
+
 };
 
 export default Card;

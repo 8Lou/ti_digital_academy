@@ -1,13 +1,18 @@
 /* button.css */
 button {
-  align-self: flex-start; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start;
   background-color: var(--color-button-background-active);
-  color: var(--color-link-primary); 
+  color: var(--color-link-primary);
   border-radius: var(--border-radius-button);
+  font-size: var(--font-size-m);
   border: none;
-  padding: 1rem; 
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
-font-size: var(--font-size-m);
+  padding: 1rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  min-height: 50px;
+  min-width: 50px;
 }
 
 .button:hover {
@@ -16,5 +21,5 @@ font-size: var(--font-size-m);
 
 .button--disabled {
   background-color: var(--color-button-background-default);
-  pointer-events: none; 
+  pointer-events: none;
 }
