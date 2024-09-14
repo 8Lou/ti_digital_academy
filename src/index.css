@@ -16,12 +16,12 @@
   --color-button-background-hover: rgba(140, 40, 40, 1);
   --color-button-background-disabled: rgba(248, 175, 175, 1);
   
-  --font-size-s: 0.875rem; /* 14px */
-  --font-size-m: 1rem; /* 16px */
-  --font-size-l: 1.125rem; /* 18px */
-  --font-size-xl: 1.5rem; /* 24px */
-  --font-size-2xl: 1.875rem; /* 30px */
-  --font-size-3xl: 2.25rem; /* 36px */
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 30px;
+  --font-size-3xl: 36px;
 
   --line-height-base: 1.5;
   --border-radius-button: 4px;
@@ -40,7 +40,7 @@
 
 @font-face {
   font-family: 'Jost';
-  src: url('../assets/fonts/Jost-Regular.woff2') format('woff2');
+  src: url('./assets/fonts/Jost-Regular.woff2') format('woff2');
   font-weight: 400;  
   font-style: normal;
   unicode-range: U+0400-04FF, U+0000-007F;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: 'Jost';
-  src: url('../assets/fonts/Jost-SemiBold.woff2') format('woff2');
+  src: url('./assets/fonts/Jost-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   unicode-range: U+0400-04FF, U+0000-007F;
@@ -58,7 +58,7 @@
 
 @font-face {
   font-family: 'Jost';
-  src: url('../assets/fonts/Jost-Bold.woff2') format('woff2');
+  src: url('./assets/fonts/Jost-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   unicode-range: U+0400-04FF, U+0000-007F;
@@ -79,7 +79,6 @@ a, ul {
 
 body {
   width: 100%;
-  min-width: 1440px; 
   height: 100vh;
 }
 
@@ -115,6 +114,7 @@ h6 {
 .button,
 .input {
   cursor: pointer;
+  font-family: var(--font-family-primary);
 }
 
 button:hover {
@@ -128,6 +128,7 @@ button:hover {
   -webkit-box-shadow: none;
   -webkit-border: none;
 }
+
 @media (max-width: 768px) {
   body {
       width: 80%;

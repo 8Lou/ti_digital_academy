@@ -7,7 +7,7 @@ import usePageTitle from '../../hooks/usePageTitle';
 const Home: React.FC = () => {
   usePageTitle('Catalog | Goods4you');
   return (
-    <div className="home">
+    <div>
       <Header />
       <Main />
       <Footer />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './faq.css';
-import plusIcon from '../../assets/img/Plus.svg'; 
-import closeIcon from '../../assets/img/Close.svg'; 
+import plusIcon from '../../assets/img/Plus.svg';
+import closeIcon from '../../assets/img/Close.svg';
 
 interface AccordionItem {
   question: string;
@@ -32,25 +32,29 @@ const FAQ: React.FC = () => {
 
   return (
     <div className='faq'>
+
       <h1 className='faq__title'>FAQ</h1>
       {accordionData.map((item, index) => (
-        <div key={index}  className='faq__item item'>
+        <div key={index} className='faq__item item'>
+
           <div className='faq__header'
             onClick={() => toggleAccordion(index)}
           >
             <h3 className='question'>{item.question}</h3>
-            <img 
-              src={openIndex === index ? closeIcon : plusIcon} 
-              alt={openIndex === index ? 'Close' : 'Expand'} 
+            <img
+              src={openIndex === index ? closeIcon : plusIcon}
+              alt={openIndex === index ? 'Close' : 'Expand'}
             />
           </div>
-            <h5>
-          {openIndex === index && (
-            <div className='answer'>
-              {item.answer}
-            </div>
-          )}
-            </h5>
+
+          <h5>
+            {openIndex === index && (
+              <div className='answer'>
+                {item.answer}
+              </div>
+
+            )}
+          </h5>
         </div>
       ))}
     </div>

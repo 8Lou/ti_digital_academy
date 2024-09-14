@@ -6,8 +6,8 @@
     color: var(--color-text-primary);
     background-color: var(--color-text-primary);
     height: 6rem;
-    min-width: 100vw;
-    max-width: 1440px;
+    min-width: 100%;
+    /* max-width: 1440px; */
     position: fixed;
     padding: 23px 130px;
     bottom: 0;
@@ -34,15 +34,6 @@ a {
         align-items: center;
         gap: 20px;
         margin-top: 20px;
-    }
-  }
-  
-  @media (min-width: 769px) and (max-width: 1024px) {
-    .footer {
-      padding: 0 60px;
-    }
-    .footer__nav {
-      gap: 20px;
     }
   }
   
