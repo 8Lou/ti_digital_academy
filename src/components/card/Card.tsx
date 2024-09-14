@@ -10,8 +10,7 @@ const Card: React.FC<CardProps> = ({ title, description }) => {
     return (
         <div className="card">
             <div className="card__image-container">
-                <h3 className="card__overlay">Show details
-                </h3>
+                <h3 className="card__overlay">Show details</h3>
                 <img className="card__image" src="src\assets\img\image.png" alt="Фото товара" />
             </div>
             <div className="card__content">

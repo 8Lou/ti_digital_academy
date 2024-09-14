@@ -12,14 +12,25 @@ const Main: React.FC = () => {
   };
 
 
-  const cardsData = [
-    { title: 'Карточка 1', description: 'Описание карточки 1' },
-    { title: 'Карточка 2', description: 'Описание карточки 2' },
-    { title: 'Карточка 3', description: 'Описание карточки 3' },
-    { title: 'Карточка 4', description: 'Описание карточки 4' },
-    { title: 'Карточка 5', description: 'Описание карточки 5' },
-    { title: 'Карточка 6', description: 'Описание карточки 6' },
-  ];
+  // const cardsData = [
+  //   { title: 'Карточка 1', description: 'Описание карточки 1' },
+  //   { title: 'Карточка 2', description: 'Описание карточки 2' },
+  //   { title: 'Карточка 3', description: 'Описание карточки 3' },
+  //   { title: 'Карточка 4', description: 'Описание карточки 4' },
+  //   { title: 'Карточка 5', description: 'Описание карточки 5' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  //   { title: 'Карточка 6', description: 'Описание карточки 6' },
+  // ];
+
+  const cardsData = Array.from({ length: 12 }, (_, index) => ({
+    title: `Essence Mascara Lash Princess ${index + 1}`,
+    description: `$110 ${index + 1}`,
+  }));
 
   return (
     <main className="main">
