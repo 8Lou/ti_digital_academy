@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import './card.css';
 import Button from '../button/Button';
+import { useNavigate } from 'react-router-dom';
 
 interface CardProps {
     title: string;
     description: string;
+    id: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description }) => {
+const Card: React.FC<CardProps> = ({ title, description, id }) => {
+    const navigate = useNavigate();
 
     const [count, setCount] = useState(0);
     const [showButtons, setShowButtons] = useState(false);
@@ -26,10 +29,13 @@ const Card: React.FC<CardProps> = ({ title, description }) => {
         setShowButtons(true);
     };
 
+    const handleImageClick = () => {
+        navigate(`/product/${id}`); 
+    };
+
     return (
         <div className="card">
-
-            <div className="card__image-container">
+            <div className="card__image-container" onClick={handleImageClick}>
                 <h3 className="card__overlay">Show details</h3>
                 <img className="card__image" src="src\assets\img\image.png" alt="Фото товара" />
             </div>
@@ -39,7 +45,6 @@ const Card: React.FC<CardProps> = ({ title, description }) => {
                     <h5 className='card__title'>{title}</h5>
                     <p className='price'>{description}</p>
                 </div>
-
 
                 {showButtons ? (
                     <div className="buttons-container">
@@ -59,7 +64,6 @@ const Card: React.FC<CardProps> = ({ title, description }) => {
             </div>
         </div>
     );
-
 };
 
 export default Card;

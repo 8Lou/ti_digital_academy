@@ -1,17 +1,17 @@
 import React from 'react';
 import Header from '../../components/header/Header';
-import Main from '../../components/main/Main';
 import Footer from '../../components/footer/Footer';
 import usePageTitle from '../../hooks/usePageTitle';
+import ProductCart from '../../components/cart/ProductCart';
 
-const Home: React.FC = () => {
-  usePageTitle('Catalog | Goods4you');
+const MyCart: React.FC = () => {
+  usePageTitle('My cart | Goods4you');
   return (
-    <div className="home">
+    <div>
       <Header />
-      <Main />
+      <ProductCart />
       <Footer />
       </div>
   );
 };
-export default Home;
+export default MyCart;

@@ -89,13 +89,6 @@
 }
 
 .cart__count {
-  /* display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: var(--font-size-m);
-  padding: 15px 0;
-  margin: 0 10px;
-  width: fit-content; */
   padding: 15px 26px; 
 }
 

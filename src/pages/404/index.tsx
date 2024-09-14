@@ -1,17 +1,18 @@
 import React from 'react';
 import Header from '../../components/header/Header';
-import Main from '../../components/main/Main';
 import Footer from '../../components/footer/Footer';
 import usePageTitle from '../../hooks/usePageTitle';
 
-const Home: React.FC = () => {
-  usePageTitle('Catalog | Goods4you');
+const Undefined: React.FC = () => {
+  usePageTitle('Undefined | Goods4you');
   return (
-    <div className="home">
+    <div>
       <Header />
-      <Main />
+      <span className='page__404'>
+        404
+      </span>
       <Footer />
-      </div>
+    </div>
   );
 };
-export default Home;
+export default Undefined;
