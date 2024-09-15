@@ -24,37 +24,41 @@ const accordionData: AccordionItem[] = [
 ];
 
 const FAQ: React.FC = () => {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const [openIndexes, setOpenIndexes] = useState<number[]>([]); 
+
+  // const toggleAccordion = (index: number) => {
+  //   setOpenIndex(openIndex === index ? null : index);
+  // };
 
   const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    if (openIndexes.includes(index)) {
+      // Если этот аккордеон уже открыт, закрыть его
+      setOpenIndexes(openIndexes.filter(i => i !== index));
+    } else {
+      // Иначе добавляем его в список открытых
+      setOpenIndexes([...openIndexes, index]);
+    }
   };
 
+  
   return (
     <div className='faq'>
-
       <h1 className='faq__title'>FAQ</h1>
       {accordionData.map((item, index) => (
         <div key={index} className='faq__item item'>
-
-          <div className='faq__header'
-            onClick={() => toggleAccordion(index)}
-          >
+          <div className='faq__header' onClick={() => toggleAccordion(index)}>
             <h3 className='question'>{item.question}</h3>
             <img
-              src={openIndex === index ? closeIcon : plusIcon}
-              alt={openIndex === index ? 'Close' : 'Expand'}
+              src={openIndexes.includes(index) ? closeIcon : plusIcon}
+              alt={openIndexes.includes(index) ? 'Close' : 'Expand'}
+              className={openIndexes.includes(index) ? 'rotate' : ''}
             />
           </div>
-
-          <h5>
-            {openIndex === index && (
-              <div className='answer'>
-                {item.answer}
-              </div>
-
-            )}
-          </h5>
+          <div className={`answer ${openIndexes.includes(index) ? 'expanded' : ''}`}>
+            {item.answer}
+          </div>
         </div>
       ))}
     </div>
