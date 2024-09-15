@@ -19,10 +19,10 @@ const Cart: React.FC = () => {
         <div className="cart__poduct-content">
 
           <div className="cart__poduct--large">
-            <ShoppingCard title="Product Title" description="Product Description" id={1} />
-            <ShoppingCard title="Product Title" description="Product Description" id={2} />
-            <ShoppingCard title="Product Title" description="Product Description" id={3} />
-            <ShoppingCard title="Product Title" description="Product Description" id={4} />
+            <ShoppingCard title="Product Title" description="Product Description" id="1" />
+            <ShoppingCard title="Product Title" description="Product Description" id="2" />
+            <ShoppingCard title="Product Title" description="Product Description" id="3" />
+            <ShoppingCard title="Product Title" description="Product Description" id="4" />
 
           </div>
 
@@ -38,5 +38,4 @@ const Cart: React.FC = () => {
     </div>
   );
 };
-
 export default Cart;

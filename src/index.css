@@ -121,6 +121,10 @@ p {
   font-family: var(--font-family-primary);
 }
 
+.button:hover{
+  background-color: var(--color-button-background-hover);
+}
+
 .input:focus {
   outline: none;
   box-shadow: none;

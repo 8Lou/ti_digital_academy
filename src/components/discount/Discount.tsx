@@ -4,7 +4,6 @@ import Button from '../button/Button';
 
 const Discount: React.FC = () => {
   const handleClick = () => {
-    alert('Кнопка нажата!');
   };
 
   return (

@@ -30,7 +30,7 @@
 }
 
 .card:hover .card__image {
-  background-color: rgba(213, 213, 213, 0.5);
+  background-color: var(--color-link--primary-hover);
   opacity: 0.5;
 }
 
@@ -82,10 +82,15 @@
   display: flex;
 }
 
+.cart__button:hover {
+  background-color: var(--color-button-background-hover);
+}
+
 .buttons-container {
   display: flex;
   justify-content: space-between;
   white-space: nowrap;  
+  margin-right: -20px;
 }
 
 .cart__count {

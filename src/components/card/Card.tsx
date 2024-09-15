@@ -26,11 +26,17 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
     };
 
     const handleClick = () => {
+        setCount(1);
         setShowButtons(true);
     };
 
     const handleImageClick = () => {
         navigate(`/product/${id}`); 
+    };
+
+    const handleDelete = () => {
+        setCount(0); 
+        setShowButtons(false); 
     };
 
     return (
@@ -46,14 +52,15 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
                     <p className='price'>{description}</p>
                 </div>
 
-                {showButtons ? (
+                
+                {count > 0 ? (
                     <div className="buttons-container">
                         <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
-                        <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
+                            <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
                         </Button>
-                        <span className="cart__count">{count}item</span>
+                        <span className="cart__count">{count} {count === 1 ? 'item' : 'items'}</span>
                         <Button className="button__cart-plus" onClick={handleIncrement} label={''}>
-                        <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
+                            <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
                         </Button>
                     </div>
                 ) : (
@@ -61,6 +68,7 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
                         <img src="src/assets/img/Cart.svg" alt="Кнопка Корзина" />
                     </Button>
                 )}
+                {count > 0 }
             </div>
         </div>
     );

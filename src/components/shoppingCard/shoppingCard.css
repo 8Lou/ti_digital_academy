@@ -10,9 +10,6 @@
     border: 1px solid var(--color-link--primary-hover);
     border-radius: 6px;
     padding: 12px;
-    /* padding-left: 32px;
-    margin-top: 8px;
-    margin-bottom: 102px; */
 }
 
 .shoppingCard__container:hover {
@@ -27,53 +24,32 @@
     width: auto;
 }
 .shoppingCard-two{
-    display: flex;
-    padding-bottom: 25px;
-    align-items: center;
+    padding-left: 10px;
 }
 
 .shoppingCard-three{
     display: flex;
-    padding: 37px 12px;
     align-items: center;
+    padding-right: 12px;
 }
-.card__title {
+.card__title-shopping {
     font-weight: var(--font-weight-semibold);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
+line-height: 1.;
   }
-  .card__title:hover {
+  .card__title-shopping:hover {
     text-decoration: underline;
-  }
-  
-  .price {
-    font-size: var(--font-size-l);
-    font-weight: var(--font-weight-regular);
-    color: var(--color-text-primary);
   }
 
 .shoppingCard-content {
-    /* display: contents; */
     display: flex;
-}
-
-.product-old-price {
-    text-decoration: line-through;
-    color: var(--color-text-secondary);
-    line-height: 1.25;
-}
-
-.vertical-line {
-    width:1px;
-    height: 62px;
-    margin-right: 19px;
-    background-color: var(--color-text-secondary);
+    align-items: center;
 }
 
 .shoppingCard__delete{
     color: var(--color-link-secondary);
     font-weight: var(--font-weight-regular);
+}
+
+.buttons-container{
+    padding-right: 70px;
 }
