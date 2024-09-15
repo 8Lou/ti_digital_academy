@@ -1,57 +1,112 @@
 .one__product {
-  background-color: white;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  padding-bottom: 5rem;
+  /* min-width: 1440px; */
 }
 
 .one__product-container {
-  display: flex;
-  flex-direction: column;
+  width: 100%;
+  min-height: auto;
+  padding: 50px 130px;
+  /* gap: 48px; */
+  background-color: var(--color-link-primary);
 }
 
 .one__product-content {
-  display: flex;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-gap: 40px;
 }
 
-.one__product-column {
-  padding: 10px;
+.one__product {
+  min-width: 620px;
 }
 
-.one__product-column--large {
-  width: 520px;
+.one__product--large {
+  max-width: 520px;
 }
-
 .one__product-main-image {
   width: 100%;
-  height: 400px;
-  object-fit: cover;
+  height: 520px;
+  /* object-fit: cover; */
+  border: 1px solid var(--color-link--primary-hover);
+  border-radius: 0.38rem;
 }
 
 .one__product-slider {
   display: flex;
-  overflow-x: auto;
-  margin-top: 10px;
+  gap: 20px;
+  overflow-x: hidden;
 }
 
 .one__product-thumb {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  margin-right: 5px;
+  width: 70px;
+  height: 70px;
 }
 
+.one__product--small {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 620px;
+}
+.one__product-subtitle{
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.67;
+}
 .one__product-rating {
-  color: red;
+display: flex;
+justify-content: space-between;
+margin-top: -10px;
 }
 
-.one__product-star {
-  margin-right: 5px;
+.one__product-stars {
+}
+.one__product-star{
+  fill: gray; 
+  padding-right: 0.53rem;
+
+}
+.one__product-star.active {
+  fill: red;
 }
 
-.one__product-star--active {
-  color: red;
+.one__product-star.inactive {
+  fill: gray; 
 }
+.one__product-star-text{
+  font-weight: var(--font-weight-regular);
+  line-height: 1.67;
+  color: var(--color-text-secondary);
+}
+
+.one__product-description{
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.33;
+  color: var(--color-button-background-active);
+  border-top: 1px solid var(--color-link--primary-hover);
+  border-bottom: 1px solid var(--color-link--primary-hover);
+  padding: 9px 0;
+}
+.one__product-warranty,
+.one__product-info{
+  font-size: var(--font-size-m); 
+  font-weight: var(--font-weight-regular);
+  line-height: 1.3;
+}
+
 
 .one__product-button-container {
   margin-top: 20px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .one__product-content {
+    grid-template-columns: 1fr;
+  }
 }

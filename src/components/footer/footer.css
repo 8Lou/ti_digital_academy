@@ -9,15 +9,16 @@
     min-width: 100%;
     /* max-width: 1440px; */
     position: fixed;
-    padding: 23px 130px;
+    padding: 0 130px;
     bottom: 0;
     z-index: 2;
-}
-
-.footer__nav {
+  }
+  
+  .footer__nav {
     display: flex;
     justify-content: flex-end;    
     gap: 40px;
+    margin-top: 8px;
 }
 
 a {

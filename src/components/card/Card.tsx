@@ -37,28 +37,28 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
         <div className="card">
             <div className="card__image-container" onClick={handleImageClick}>
                 <h3 className="card__overlay">Show details</h3>
-                <img className="card__image" src="src\assets\img\image.png" alt="Фото товара" />
+                <img className="card__image" src="src/assets/img/image.png" alt="Фото товара" />
             </div>
 
             <div className="card__content">
                 <div>
-                    <h5 className='card__title'>{title}</h5>
+                    <h5 className='card__title' onClick={handleImageClick} >{title}</h5>
                     <p className='price'>{description}</p>
                 </div>
 
                 {showButtons ? (
                     <div className="buttons-container">
                         <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
-                        <img src="src\assets\img\Cart-minus.svg" alt="Минус" />
+                        <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
                         </Button>
                         <span className="cart__count">{count}item</span>
                         <Button className="button__cart-plus" onClick={handleIncrement} label={''}>
-                        <img src="src\assets\img\Cart-plus.svg" alt="Плюс" />
+                        <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
                         </Button>
                     </div>
                 ) : (
                     <Button className='cart__button' onClick={handleClick} label={''}>
-                        <img src="src\assets\img\Cart.svg" alt="Кнопка Корзина" />
+                        <img src="src/assets/img/Cart.svg" alt="Кнопка Корзина" />
                     </Button>
                 )}
             </div>

@@ -2,7 +2,7 @@
 .faq {
   display: flex;
   flex-direction: column;
-  padding: 60px 0;
+  padding: 68px 0;
   max-width: 880px;
   width: 100%;
 }
@@ -23,11 +23,10 @@
 }
 
 .item {
-  padding: 16px 0;
+  padding: 17px 0;
 }
 
 .answer {
-  padding: 20px 0 0;
   white-space: pre-wrap;
   font-weight: var(--font-weight-semibold);
   line-height: 1.6;
@@ -38,6 +37,7 @@
 }
 
 .answer.expanded {
+  padding: 18px 0 0;
   opacity: 1;       
   max-height: 500px; 
 }

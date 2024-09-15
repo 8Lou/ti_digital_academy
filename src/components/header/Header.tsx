@@ -2,6 +2,9 @@ import React from 'react';
 import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate } from 'react-router-dom';
+import cartIcon from '../../assets/img/Cart.svg';
+import bagIcon from '../../assets/img/bage.svg';
+
 
 const Header: React.FC = () => {
   const navigate = useNavigate(); 
@@ -49,8 +52,8 @@ const Header: React.FC = () => {
             Cart
             <span className="cart-badge"></span>
             <span className="cart-icon">
-              <img className="menu__cart-svg" src="src\assets\img\Cart.svg" alt="Фото товара" />
-              <img className="menu__bage-svg" src="src\assets\img\Bage.svg" alt="Фото товара" />
+              <img src={cartIcon} className='menu__cart-svg' alt='Иконка корзины' />
+              <img src={bagIcon} className='menu__bage-svg' alt="Иконка бэйджа" />
             </span>
           </a>
           <a href="/undefined" onClick={handleUserClick} >Johnson Smith</a>

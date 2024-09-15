@@ -111,6 +111,10 @@ h6 {
   font-size: var(--font-size-s); /* 14px */
 }
 
+p {
+  font-size: var(--font-size-l); /* 18px */
+  line-height: 1.7;
+}
 .button,
 .input {
   cursor: pointer;

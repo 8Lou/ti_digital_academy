@@ -7,11 +7,9 @@ import './style.css';
 const Undefined: React.FC = () => {
   usePageTitle('Undefined | Goods4you');
   return (
-    <div>
+    <div className='page__404'>
       <Header />
-      <div className='page__404'>
-      <img className="page__404-svg" src="src\assets\img\404.jpg" alt="Фото 404" />
-      </div>
+      <img className="page__404-svg" src="src/assets/img/404.jpg" alt="Фото 404" />
       <Footer />
     </div>
   );

@@ -2,20 +2,20 @@
 .baner {
   display: flex;
   flex-direction: column;
-  gap: 33px;
-  padding: 115px 0; 
+  gap: 30px;
+  padding: 108px 0; 
 }
 
 .baner__title {
   color: var(--color-link-primary);
   font-weight: var(--font-weight-regular);
-  line-height: 1.3;
+  line-height: 1.4;
 }
 
 .baner__text {
   color: var(--color-link-primary);
   font-weight: var(--font-weight-semibold);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .button{
