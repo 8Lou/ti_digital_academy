@@ -2,6 +2,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 80rem;
+    height: 100vh;
     background-color: var(--color-background-primary);
 }
+.page__404-svg{
+    width: 500px;
+    border-radius: 50%; 
+    box-shadow: 0 0 100px rgba(238, 64, 232, 0.5); 
+  }

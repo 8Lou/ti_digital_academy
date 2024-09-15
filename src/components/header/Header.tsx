@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   const handleFaqClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     navigate('/');
-
+    
     setTimeout(() => {
       const element = document.getElementById('faq');
       if (element) {
@@ -33,6 +33,11 @@ const Header: React.FC = () => {
       }
     }, 100); 
   };
+  
+  const handleUserClick = () => {
+    navigate('/undefined'); 
+  };
+
   return (
     <header className="header">
       <div className="header__content">
@@ -48,7 +53,7 @@ const Header: React.FC = () => {
               <img className="menu__bage-svg" src="src\assets\img\Bage.svg" alt="Фото товара" />
             </span>
           </a>
-          <a href="#contact">Johnson Smith</a>
+          <a href="/undefined" onClick={handleUserClick} >Johnson Smith</a>
         </nav>
       </div>
     </header>
