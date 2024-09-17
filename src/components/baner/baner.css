@@ -3,7 +3,8 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 108px 0; 
+  padding: 206px 130px 115px; 
+  background-color: var(--color-background-primary);
 }
 
 .baner__title {
@@ -18,6 +19,7 @@
   line-height: 1.5;
 }
 
-.button{
-  padding: 1.25rem 3.13rem;
+.baner__button{
+  align-self: flex-start;
+  padding: 20px 50px;
 }

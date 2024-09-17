@@ -34,7 +34,7 @@
   line-height: var(--line-height-base);
   font-weight: var(--font-weight-regular);
   color: var(--color-text-primary);
-  background-color: var(--color-background-primary);
+  background-color: var(--color-link-primary);
   font-synthesis: none;
 }
 
@@ -86,7 +86,6 @@ a:hover {
   text-decoration: underline; 
 }
 
-
 h1 {
   font-size: var(--font-size-3xl); /* 36px */
 }
@@ -115,14 +114,10 @@ p {
   font-size: var(--font-size-l); /* 18px */
   line-height: 1.7;
 }
-.button,
+
 .input {
   cursor: pointer;
   font-family: var(--font-family-primary);
-}
-
-.button:hover{
-  background-color: var(--color-button-background-hover);
 }
 
 .input:focus {

@@ -1,12 +1,13 @@
 import React from 'react';
-import './main.css';
+import './catalog.css';
 import Search from '../searche/Search';
 import Card from '../card/Card';
 import Baner from '../baner/Baner';
 import Faq from '../faq/Faq';
 import Button from '../button/Button';
+import Layout from '../layout/Layout';
 
-const Main: React.FC = () => {
+const Catalog: React.FC = () => {
   const handleSearch = (query: string) => {
     console.log('Поиск:', query);
     // todo: добавить логику обработки запроса
@@ -29,32 +30,33 @@ const Main: React.FC = () => {
   // заменить index на id?
 
   return (
-    <main className="main">
+    <>
+      <Baner />
+      <Layout>
 
-      <div className="block__up">
-        <Baner />
-      </div>
+        <div className="catalog">
 
-      <div className="block__midle">
+          <h1 className='catalog__title' id="catalog">Catalog</h1>
 
-        <h1 className='catalog' id="catalog">Catalog</h1>
+          <Search onSearch={handleSearch} />
 
-        <Search onSearch={handleSearch} />
+          <div className="catalog__card-grid">
+            {cardsData.map((card, index) => (
+              <Card key={index} id={index.toString()} title={card.title} description={card.description} />
+            ))}
+          </div>
 
-        <div className="card__grid">
-          {cardsData.map((card, index) => (
-            <Card key={index} id={index.toString()} title={card.title} description={card.description} />
-          ))}
+          <div className="catalog__button">
+            <Button className='catalog__button-show' label="Show more" onClick={handleClick} />
+          </div>
+
         </div>
-        <div className="button__show">
-          <Button className='button' label="Show more" onClick={handleClick} />
-        </div>
-      </div>
 
-      <div id="faq" className="block__down">
-        <Faq />
-      </div>
+      </Layout>
+      <Faq />
 
-    </main>
+    </>
   );
-}; export default Main;
+};
+
+export default Catalog;

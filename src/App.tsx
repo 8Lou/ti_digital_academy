@@ -7,22 +7,6 @@ import Undefined from './pages/404';
 function App() {
   return (
     <Router>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          {/* <li>
-            <Link to="/product/${id}">OneProduct</Link>
-          </li> */}
-          <li>
-            <Link to="/cart">Cart</Link>
-          </li>
-          <li>
-            <Link to="/undefined">Undefined</Link>
-          </li>
-        </ul>
-      </nav>
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/product/:id" element={<OneProduct />} />
