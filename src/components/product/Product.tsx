@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './product.css';
 import Image from '../../assets/img/MainPhoto.png';
 import Mini from '../../assets/img/mini.png';
@@ -15,6 +15,39 @@ import Layout from '../layout/Layout';
 const Product: React.FC = () => {
 
   const miniImages = [Mini, Mini1, Mini2, Mini3, Mini4, Mini5];
+  const [product, setProduct] = useState<any>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/products/1')
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching the product data:', error);
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <Layout>
+        <div>Loading...</div>
+      </Layout>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <Layout>
+        <div>Error loading product data.</div>
+      </Layout>
+    );
+  }
 
   const totalStars = 5;
   const activeStars = 4;
@@ -24,9 +57,14 @@ const Product: React.FC = () => {
       <div className="one__product-content">
 
         <div className="one__product--large">
-          <img src={Image} alt="Фото продукта в сладере" className="one__product-main-image" />
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            alt="Фото продукта на сладере"
+            className="one__product-main-image"
+          />
           <div className="one__product-slider">
-            {miniImages.map((src, i) => (
+          {product.images.map((src: string, i: number) => (
               <img key={i} src={src} alt={`Preview ${i + 1}`} className="one__product-thumb" />
             ))}
           </div>
@@ -47,10 +85,12 @@ const Product: React.FC = () => {
             </div>
             <h5 className="one__product-star-text">electronics, selfie accessories</h5>
           </div>
-          <h4 className="one__product-description">In Stock - Only 5 left!</h4>
-          <p className="one__product-info">The Essence Mascara Lash Princess is a popular mascara known for its <br />volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.</p>
-          <h5 className="one__product-warranty">1 month warranty</h5>
-          <h5 className="one__product-ships">Ships in 1 month</h5>
+          <h4 className="one__product-description">
+          {product.stock > 0 ? 'In Stock' : 'Out of Stock'} - Only {product.stock} left!
+          </h4>
+          <p className="one__product-info">{product.description}</p>
+          <h5 className="one__product-warranty">Brand: {product.brand}</h5>
+          <h5 className="one__product-ships">Price: ${product.price}</h5>
 
           <Discount />
         </div>
