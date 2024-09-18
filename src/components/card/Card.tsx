@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
 
                 
                 {count > 0 ? (
-                    <div className="buttons-container">
+                    <div className="buttons__container">
                         <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
                             <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
                         </Button>

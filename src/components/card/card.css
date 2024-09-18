@@ -82,15 +82,11 @@
   display: flex;
 }
 
-.cart__button:hover {
-  background-color: var(--color-button-background-hover);
-}
-
-.buttons-container {
+.buttons__container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   white-space: nowrap;  
-  margin-right: -20px;
 }
 
 .cart__count {
