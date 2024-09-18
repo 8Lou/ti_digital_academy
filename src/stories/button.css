@@ -1,0 +1,27 @@
+/* button.css */
+button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-button-background-active);
+  font-family: var(--font-family-primary);
+  color: var(--color-link-primary);
+  border-radius: var(--border-radius-button);
+  font-size: var(--font-size-m);
+  border: none;
+  padding: 1rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  min-height: 50px;
+  min-width: 50px;
+  cursor: pointer;
+  /* width: fit-content; */
+}
+
+button:hover {
+  background-color: var(--color-button-background-hover);
+}
+
+.button--disabled {
+  background-color: var(--color-button-background-default);
+  pointer-events: none;
+}

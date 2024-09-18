@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './shoppingCard.css';
-import Button from '../button/Button';
+import Button from './Button';
 import { useNavigate } from 'react-router-dom';
-import MidlePhoto from '../../assets/img/MidlePhoto.png';
+import MidlePhoto from './MidlePhoto.png';
 
 interface ShoppingCardProps {
   title: string;
@@ -10,7 +10,7 @@ interface ShoppingCardProps {
   id: string;
 }
 
-const ShoppingCard: React.FC<ShoppingCardProps> = ({ id, title, description }) => {
+const ShoppingCard: React.FC<ShoppingCardProps> = ({ id }) => {
   const navigate = useNavigate();
 
   const handleImageClick = () => {
@@ -35,14 +35,16 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({ id, title, description }) =
     }
   };
 
+  // Функция для обработки нажатия на кнопку корзины
   const handleCartClick = () => {
-    setCount(1);
-    setShowButtons(true); 
+    setCount(1); // Установка счетчика на 1
+    setShowButtons(true); // Показываем кнопки для увеличения/уменьшения
   };
 
+  // Функция для обнуления счетчика
   const handleDelete = () => {
     setCount(0);
-    setShowButtons(false); 
+    setShowButtons(false); // Скрываем кнопки увеличения/уменьшения
   };
 
   return (
