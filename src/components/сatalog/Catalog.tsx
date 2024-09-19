@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { debounce } from 'lodash';
 import './catalog.css';
 import Search from '../searche/Search';
 import Card from '../card/Card';
@@ -8,26 +9,37 @@ import Button from '../button/Button';
 import Layout from '../layout/Layout';
 
 const Catalog: React.FC = () => {
-  const handleSearch = (query: string) => {
-    console.log('Поиск:', query);
-    // todo: добавить логику обработки запроса
+  const [products, setProducts] = useState([]);
+  const [query, setQuery] = useState('');
+  const [skip, setSkip] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const fetchProducts = useCallback(async () => {
+    const response = await fetch(`https://dummyjson.com/products/search?q=${query}&limit=12&skip=${skip}`);
+    const data = await response.json();
+    setProducts(prev => skip === 0 ? data.products : [...prev, ...data.products]);
+    setTotal(data.total);
+  }, [query, skip]);
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
+
+  const debouncedSearch = useCallback(
+    debounce((newQuery: string) => {
+      setQuery(newQuery);
+      setSkip(0);
+    }, 300),
+    []
+  );
+
+  const handleSearch = (newQuery: string) => {
+    debouncedSearch(newQuery);
   };
 
-  const cardsData = Array.from({ length: 12 }, () => ({
-    title: `Essence Mascara Lash Princess`,
-    description: `$110`,
-  }));
-
-  const handleClick = () => {
-    // добавить логику для обработки нажатия кнопки
+  const handleShowMore = () => {
+    setSkip(prev => prev + 12);
   };
-
-  // todo: доработать логику
-  // const cardsData = Array.from({ length: 12 }, (_, index) => ({
-  //   title: `Essence Mascara Lash Princess ${index + 1}`,
-  //   description: `$110 ${index + 1}`,
-  // }));
-  // заменить index на id?
 
   return (
     <>
@@ -41,20 +53,22 @@ const Catalog: React.FC = () => {
           <Search onSearch={handleSearch} />
 
           <div className="catalog__card-grid">
-            {cardsData.map((card, index) => (
-              <Card key={index} id={index.toString()} title={card.title} description={card.description} />
+            {products.map((product: any) => (
+              <Card key={product.id} id={product.id.toString()} title={product.title} description={`$${product.price}`} />
             ))}
           </div>
 
-          <div className="catalog__button">
-            <Button className='catalog__button-show' label="Show more" onClick={handleClick} />
-          </div>
+          {products.length < total && (
+            <div className="catalog__button">
+              <Button className='catalog__button-show' label="Show more" onClick={handleShowMore} />
+            </div>
+          )}
 
         </div>
 
       </Layout>
       <Faq />
-
+      
     </>
   );
 };
