@@ -1,11 +1,7 @@
 .one__product-content {
   display: grid;
-  grid-template-columns: min-content auto;
+  grid-template-columns: 520px auto;
   grid-gap: 40px;
-}
-
-.one__product {
-  min-width: 620px;
 }
 
 .one__product--large {

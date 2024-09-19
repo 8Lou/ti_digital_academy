@@ -7,11 +7,10 @@ import Minus from '../../assets/img/Cart-minus.svg';
 interface DiscountProps {
   price: number;
   discountPercentage: number;
-  discountedPrice: number;
-  oldPrice: number;
+  newPrice: number;
 }
 
-const Discount: React.FC<DiscountProps> = ({ price, discountPercentage, discountedPrice, oldPrice }) => {
+const Discount: React.FC<DiscountProps> = ({ price, discountPercentage, newPrice }) => {
 
   const [count, setCount] = React.useState(0);
   const [showButtons, setShowButtons] = React.useState(false);
@@ -31,13 +30,15 @@ const Discount: React.FC<DiscountProps> = ({ price, discountPercentage, discount
     setShowButtons(true);
   };
 
+  const totalPrice = count > 0 ? count * newPrice : newPrice;
+
   return (
     <div className="discount__container">
 
       <div className="discount__price-content">
         <div className="discount__wrap-one">
-          <h1 className="discount__price">${price.toFixed(2)}</h1>
-          <h5 className="discount__old-price">${(price - discountedPrice).toFixed(2)}</h5>
+          <h1 className="discount__price">${totalPrice.toFixed(2)}</h1>
+          <h5 className="discount__old-price">${price.toFixed(2)}</h5>
         </div>
 
         <div className="discount__wrap-two">
