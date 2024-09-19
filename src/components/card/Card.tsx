@@ -7,9 +7,10 @@ interface CardProps {
     title: string;
     description: string;
     id: string;
+    image: string;
 }
 
-const Card: React.FC<CardProps> = ({ title, description, id }) => {
+const Card: React.FC<CardProps> = ({ title, description, id, image }) => {
     const navigate = useNavigate();
 
     const [count, setCount] = useState(0);
@@ -34,16 +35,11 @@ const Card: React.FC<CardProps> = ({ title, description, id }) => {
         navigate(`/product/${id}`); 
     };
 
-    const handleDelete = () => {
-        setCount(0); 
-        setShowButtons(false); 
-    };
-
     return (
         <div className="card">
             <div className="card__image-container" onClick={handleImageClick}>
                 <h3 className="card__overlay">Show details</h3>
-                <img className="card__image" src="src/assets/img/image.png" alt="Фото товара" />
+                <img className="card__image" src={image} alt="Фото товара" />
             </div>
 
             <div className="card__content">

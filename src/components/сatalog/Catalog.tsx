@@ -8,6 +8,12 @@ import Faq from '../faq/Faq';
 import Button from '../button/Button';
 import Layout from '../layout/Layout';
 
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+}
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState('');
@@ -53,8 +59,8 @@ const Catalog: React.FC = () => {
           <Search onSearch={handleSearch} />
 
           <div className="catalog__card-grid">
-            {products.map((product: any) => (
-              <Card key={product.id} id={product.id.toString()} title={product.title} description={`$${product.price}`} />
+            {products.map((product: Product) => (
+              <Card key={product.id} id={product.id.toString()} title={product.title} description={`${product.price}`} image={product.thumbnail} />
             ))}
           </div>
 
@@ -68,7 +74,7 @@ const Catalog: React.FC = () => {
 
       </Layout>
       <Faq />
-      
+
     </>
   );
 };
