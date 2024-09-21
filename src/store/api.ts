@@ -9,7 +9,7 @@ export const cartApi = createApi({
       query: () => 'carts',
     }),
     getCartById: builder.query<Cart, number>({
-      query: (cartId) => `carts/${cartId}`,
+      query: (cartId) => `carts/user/${cartId}`,
     }),
     getCartsByUser: builder.query<Cart, number>({
       query: (userId) => `carts/user/${userId}`,

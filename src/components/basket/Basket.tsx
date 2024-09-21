@@ -3,7 +3,7 @@ import './basket.css';
 import ShoppingCard from '../shoppingCard/ShoppingCard';
 import Layout from '../layout/Layout';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart, setCart } from '../../store/cartSlice';
+import { fetchCart } from '../../store/cartSlice';
 import { RootState } from '../../../types';
 
 const Basket: React.FC = () => {
@@ -11,12 +11,9 @@ const Basket: React.FC = () => {
   const { cart, loading, error } = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
-    const cachedCart = localStorage.getItem('cart');
-    if (!cachedCart) {
-      dispatch(fetchCart(7)); // ID пользователя
-    } else {
-      dispatch(setCart(JSON.parse(cachedCart)));
-    }
+    console.log()
+    const userId = 33; // Хардкодим ID пользователя
+    dispatch(fetchCart(userId));
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
@@ -25,7 +22,6 @@ const Basket: React.FC = () => {
   const products = cart?.products || [];
   const totalQuantity = cart?.totalQuantity || 0;
   const totalPrice = products.reduce((acc, product) => acc + product.discountedTotal, 0);
-  const totalPriceWithoutDiscount = products.reduce((acc, product) => acc + product.price * product.quantity, 0);
 
   if (products.length === 0) {
     return (
@@ -41,37 +37,27 @@ const Basket: React.FC = () => {
     <Layout>
       <div className="basket__container">
         <h1 className="basket__title">My cart</h1>
-
         <div className="basket__content">
           <div className="basket__item">
             {products.map(product => (
               <ShoppingCard
-              key={product.id}
-              id={product.id.toString()}
-              title={product.title}
-              description={`Price: ${product.price}`}
-              price={product.price}
-              discountPercentage={product.discountPercentage}
-              thumbnail={product.thumbnail}
-              totalQuantity={totalQuantity}
-              totalPrice={totalPrice}
-              totalPriceWithoutDiscount={totalPriceWithoutDiscount}
-            />
+                key={product.id}
+                id={product.id.toString()}
+                title={product.title}
+                price={product.price}
+                discountPercentage={product.discountPercentage}
+                thumbnail={product.thumbnail}
+                quantity={product.quantity}
+              />
             ))}
           </div>
-
           <div className="basket__value">
             <h4 className="basket__text">
               Total count: <span className="basket__number">{totalQuantity} items</span>
             </h4>
             <h4 className="basket__text">
-              Price without discount:{' '}
-              <span className="basket__number">${totalPriceWithoutDiscount.toFixed(2)}</span>
-            </h4>
-            <hr />
-            <h3 className="basket__text">
               Total price: <span className="basket__number">${totalPrice.toFixed(2)}</span>
-            </h3>
+            </h4>
           </div>
         </div>
       </div>

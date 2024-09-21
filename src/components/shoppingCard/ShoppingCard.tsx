@@ -3,7 +3,7 @@ import './shoppingCard.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart, removeFromCart } from '../../store/cartSlice';
+// import { addToCart, removeFromCart } from '../../store/api';
 
 interface ShoppingCardProps {
   id: string;
@@ -12,30 +12,25 @@ interface ShoppingCardProps {
   price: number;
   discountPercentage: number;
   thumbnail: string;
-  totalQuantity: number;
-  totalPrice: number;
-  totalPriceWithoutDiscount: number;
+  quantity: number;
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({
   id,
   title,
-  description,
   price,
   discountPercentage,
   thumbnail,
-  totalQuantity,
-  totalPrice,
-  totalPriceWithoutDiscount,
+  quantity,
 }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.products);
   
-  // Определение наличия товара в корзине
-  const itemInCart = products.find(item => item.id === Number(id));
-  const [count, setCount] = useState(itemInCart ? itemInCart.quantity : 0);
-
+  const [count, setCount] = useState(0);
+  
+  // const itemInCart = products.find(item => item.id === Number(id));
+  // const [count, setCount] = useState(itemInCart ? itemInCart.quantity : 0);
   const newPrice = price - (price * discountPercentage / 100);
 
   const handleImageClick = () => {
@@ -53,32 +48,14 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   };
 
   const handleAddToCart = () => {
-    const product = {
-      id: Number(id),
-      title,
-      price,
-      quantity: count + 1,
-      total: price * (count + 1),
-      discountedTotal: newPrice * (count + 1),
-      thumbnail,
-    };
-    dispatch(addToCart(product));
+    console.log(`Добавлено ${count + 1} товара(ов) ${title}`);
     setCount(0);
   };
 
-  const handleDelete = () => {
-    dispatch(removeFromCart(Number(id)));
+    const handleDelete = () => {
     setCount(0);
+    setShowButtons(false); 
   };
-
-  // Обновление состояния count при изменении itemInCart
-  useEffect(() => {
-    if (itemInCart) {
-      setCount(itemInCart.quantity);
-    } else {
-      setCount(0);
-    }
-  }, [itemInCart]);
 
   return (
     <div className="shoppingCard__container">
@@ -92,7 +69,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         </div>
       </div>
       <div className="shoppingCard-three">
-        {count === 0 ? (
+        {quantity === 0 ? (
           <Button className='cart__button' onClick={handleAddToCart} label='Add to Cart'>
             <img src="src/assets/img/Cart.svg" alt="Кнопка Корзина" />
           </Button>
@@ -101,13 +78,13 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
             <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
               <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
             </Button>
-            <span className="cart__count">{count} {count === 1 ? 'item' : 'items'}</span>
+            <span className="cart__count">{quantity} {quantity === 1 ? 'item' : 'items'}</span>
             <Button className="button__cart-plus cart__button" onClick={handleIncrement} label={''}>
               <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
             </Button>
           </div>
         )}
-        {count > 0 && (
+        {quantity > 0 && (
           <h6 className="shoppingCard__delete" onClick={handleDelete}>Delete</h6>
         )}
       </div>

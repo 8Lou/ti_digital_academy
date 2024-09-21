@@ -8,6 +8,7 @@
   max-width: 1180px;
   width: 100%;
   background-color: var(--color-link-primary);
+  color: #000;
 }
 
 .basket__title {

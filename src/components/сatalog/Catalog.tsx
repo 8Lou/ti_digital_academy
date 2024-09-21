@@ -7,13 +7,8 @@ import Baner from '../baner/Baner';
 import Faq from '../faq/Faq';
 import Button from '../button/Button';
 import Layout from '../layout/Layout';
+import  {Product} from  '../../../types';
 
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  thumbnail: string;
-}
 const Catalog: React.FC = () => {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState('');
@@ -60,7 +55,7 @@ const Catalog: React.FC = () => {
 
           <div className="catalog__card-grid">
             {products.map((product: Product) => (
-              <Card key={product.id} id={product.id.toString()} title={product.title} description={`${product.price}`} image={product.thumbnail} />
+              <Card key={product.id} product= {product}/>
             ))}
           </div>
 

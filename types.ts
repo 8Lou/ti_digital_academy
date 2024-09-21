@@ -5,6 +5,7 @@ export interface Product {
     quantity: number;
     total: number;
     discountedTotal: number;
+    discountPercentage: number;
     thumbnail: string;
   }
   
