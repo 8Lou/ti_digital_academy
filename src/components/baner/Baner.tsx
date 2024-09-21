@@ -8,7 +8,7 @@ const Baner: React.FC = () => {
     const navigate = useNavigate();
 
     const handleCartClick = () => {
-        navigate('/cart');
+        navigate('/basket');
     };
 
     return (

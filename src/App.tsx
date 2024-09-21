@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/home';
 import OneProduct from './pages/oneProduct';
-import Cart from './pages/myCart';
 import Undefined from './pages/404';
+import MyCart from './pages/myCart';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>} />
         <Route path="/product/:id" element={<OneProduct />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/basket" element={<MyCart />} />
         <Route path="/undefined" element={<Undefined />} />
       </Routes>
     </Router>

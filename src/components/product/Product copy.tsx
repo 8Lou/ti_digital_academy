@@ -1,3 +1,5 @@
+// рабочий но без Редакс
+
 import React, { useState, useEffect } from 'react';
 import './product.css';
 import starIcon from '../../assets/img/Star.svg';
@@ -33,50 +35,41 @@ const Product: React.FC = () => {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const dispatch = useDispatch();
 
+  const handleThumbnailClick = (image: string) => {
+    setSelectedImage(image);
+  };
+
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`https://dummyjson.com/products/${id}`);
-        if (!response.ok) {
-          if (response.status === 404) {
+    fetch(`https://dummyjson.com/products/${id}`)
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 404) {
             navigate('/undefined');
           }
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error(`HTTP error! status: ${res.status}`);
         }
-        const data = await response.json();
+        return res.json();
+      })
+      .then((data) => {
         setProduct(data);
         if (data.images.length > 0) { 
-          setSelectedImage(data.images[0]);
+        setSelectedImage(data.images[0]);
         }
-      } catch (error) {
+        setLoading(false);
+      })
+      .catch((error) => {
         console.error('Error fetching the product data:', error);
         setError(error);
-      } finally {
         setLoading(false);
-      }
-    };
-
-    fetchProduct();
+      });
   }, [id, navigate]);
 
-  const totalStars = 5;
-  const activeStars = Math.round(product?.rating || 0);
-  const newPrice = product ? product.price - (product.price * product.discountPercentage / 100) : 0;
-  
   useEffect(() => {
     if (product) {
       document.title = product.title;
     }
   }, [product]);
-  
-  useEffect(() => {
-    if (product) {
-      dispatch(setNewPrice(newPrice));
-    }
-  }, [newPrice, product, dispatch]);
 
-  
-  
   if (loading) {
     return (
       <Layout>
@@ -92,7 +85,19 @@ const Product: React.FC = () => {
       </Layout>
     );
   }
+
+  const totalStars = 5;
+  const activeStars = Math.round(product.rating);
+  const newPrice = product.price - product.price * product.discountPercentage / 100;
+
+  // useEffect(() => {
+  //   dispatch(setNewPrice(newPrice));
+  // }, [newPrice, dispatch]);
   
+  // useEffect(() => {
+  //   dispatch(setProduct(product));
+  // }, [product, dispatch]);
+
   return (
     <Layout>
       <div className="one__product-content">

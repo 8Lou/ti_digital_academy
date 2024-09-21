@@ -1,46 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './shoppingCard.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
+import MidlePhoto from '../../assets/img/MidlePhoto.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart, removeFromCart } from '../../store/cartSlice';
+import '../../../types';
 
 interface ShoppingCardProps {
-  id: string;
   title: string;
   description: string;
+  id: string;
   price: number;
-  discountPercentage: number;
-  thumbnail: string;
-  totalQuantity: number;
-  totalPrice: number;
-  totalPriceWithoutDiscount: number;
-}
+  discountPercentage: number; // Добавлено для скидки
+  thumbnail: string; // Добавлено для изображения
+  }
 
-const ShoppingCard: React.FC<ShoppingCardProps> = ({
-  id,
-  title,
-  description,
-  price,
-  discountPercentage,
-  thumbnail,
-  totalQuantity,
-  totalPrice,
-  totalPriceWithoutDiscount,
-}) => {
+const ShoppingCard: React.FC<ShoppingCardProps> = ({ id, title, description, price, discountPercentage, thumbnail }) => {
+  // console.log('Продукт:', { id, title, description });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.cart.products);
-  
-  // Определение наличия товара в корзине
-  const itemInCart = products.find(item => item.id === Number(id));
-  const [count, setCount] = useState(itemInCart ? itemInCart.quantity : 0);
-
-  const newPrice = price - (price * discountPercentage / 100);
+  const newPrice = useSelector((state) => state.cart.newPrice); 
+  const [count, setCount] = useState(0);
 
   const handleImageClick = () => {
     navigate(`/product/${id}`);
   };
+
+  // const cardsData = Array.from({ length: 1 }, () => ({
+  //   title: 'Essence Mascara Lash Princess',
+  //   description: '$110',
+  // }));
 
   const handleIncrement = () => {
     setCount(count + 1);
@@ -52,15 +42,48 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     }
   };
 
+  // const handleCartClick = () => {
+  //   setCount(1);
+  //   setShowButtons(true); 
+  // };
+
+  // const handleDelete = () => {
+  //   setCount(0);
+  //   setShowButtons(false); 
+  // };
+
+  // const handleAddToCart = () => {
+  //   if (count > 0) {
+  //     const product = {
+  //       id: Number(id),
+  //       title,
+  //       price,
+  //       quantity: count,
+  //       discountedTotal: price * count,
+  //     };
+  //     dispatch(addToCart(product));
+  //     setCount(0);
+  //   }
+  // };
+
+  // const handleDelete = () => {
+  //   setCount(0);
+  //   dispatch(removeFromCart(Number(id)));
+  // };
+
+  // const handleAddToCart = () => {
+  //   if (product) {
+  //     dispatch(addToCart(product));
+  //   }
+  // };
+
   const handleAddToCart = () => {
     const product = {
       id: Number(id),
       title,
       price,
       quantity: count + 1,
-      total: price * (count + 1),
-      discountedTotal: newPrice * (count + 1),
-      thumbnail,
+      discountedTotal: price * (count + 1),
     };
     dispatch(addToCart(product));
     setCount(0);
@@ -70,27 +93,24 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     dispatch(removeFromCart(Number(id)));
     setCount(0);
   };
-
-  // Обновление состояния count при изменении itemInCart
-  useEffect(() => {
-    if (itemInCart) {
-      setCount(itemInCart.quantity);
-    } else {
-      setCount(0);
-    }
-  }, [itemInCart]);
-
+  
   return (
     <div className="shoppingCard__container">
       <div className="shoppingCard-content">
         <div className="shoppingCard-one">
-          <img className="card__image" src={thumbnail} alt={title} />
+          <img className="card__image" src={MidlePhoto} alt="Фото товара" />
         </div>
+
         <div className="shoppingCard-two">
-          <h5 className='card__title' onClick={handleImageClick}>{title}</h5>
-          <p className='price'>${newPrice.toFixed(2)}</p>
+          {/* {cardsData.map((card, index) => (
+            <div key={index}> */}
+              <h5 className='card__title' onClick={handleImageClick}>{title}</h5>
+              <p className='price'>${newPrice ? newPrice : price}</p>
+              {/* </div> */}
+          {/* ))} */}
         </div>
       </div>
+
       <div className="shoppingCard-three">
         {count === 0 ? (
           <Button className='cart__button' onClick={handleAddToCart} label='Add to Cart'>
@@ -107,6 +127,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
             </Button>
           </div>
         )}
+
         {count > 0 && (
           <h6 className="shoppingCard__delete" onClick={handleDelete}>Delete</h6>
         )}
