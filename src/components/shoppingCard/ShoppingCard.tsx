@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './shoppingCard.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 
 interface ShoppingCardProps {
   id: string;
@@ -23,13 +23,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   quantity,
 }) => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  const products = useSelector((state) => state.cart.products);
+  // const products = useSelector((state) => state.cart.products);
   
   const [count, setCount] = useState(0);
   
-  // const itemInCart = products.find(item => item.id === Number(id));
-  // const [count, setCount] = useState(itemInCart ? itemInCart.quantity : 0);
   const newPrice = price - (price * discountPercentage / 100);
 
   const handleImageClick = () => {
@@ -53,7 +50,6 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
 
     const handleDelete = () => {
     setCount(0);
-    setShowButtons(false); 
   };
 
   return (

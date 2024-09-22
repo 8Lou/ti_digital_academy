@@ -9,7 +9,7 @@ const MyCart: React.FC = () => {
   return (
     <div>
       <Header cart={undefined} />
-      <Basket />
+      <Basket cart={undefined} />
       <Footer />
       </div>
   );

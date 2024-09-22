@@ -11,13 +11,16 @@ import { fetchCart } from './store/cartSlice';
 function App() {
   
   const dispatch = useDispatch();
-  const cart = useSelector((state: RootState) => state.cart.cart);
+  const { cart, loading, error } = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
     if (!cart) {
-      dispatch(fetchCart(33));// ID пользователя
+      dispatch(fetchCart(6));// ID пользователя
     }
   }, [dispatch, cart]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <Router>

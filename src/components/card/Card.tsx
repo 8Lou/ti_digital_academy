@@ -22,8 +22,6 @@ const Card: React.FC<CardProps> = ({ product, setCart }) => {
     const quantity = productInCart?.quantity || (cart && cart[id]) || 0;
     const newPrice = price - (price * discountPercentage / 100);
 
-    // const [count, setCount] = useState(quantity);
-
     const handleIncrement = () => {
         setCart((prevCart) => ({
             ...prevCart,

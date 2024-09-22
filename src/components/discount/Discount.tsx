@@ -3,7 +3,7 @@ import './discount.css';
 import Button from '../button/Button';
 import Plus from '../../assets/img/Cart-plus.svg';
 import Minus from '../../assets/img/Cart-minus.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../types';
 import { selectProductInCart } from '../../store/selectors';
 
@@ -12,35 +12,16 @@ interface DiscountProps {
   price: number;
   discountPercentage: number;
   quantity: number;
-   // newPrice: number;
 }
 
 const Discount: React.FC<DiscountProps> = ({ productId, price, discountPercentage }) => {
 
-  const dispatch = useDispatch();
-  const [showButtons, setShowButtons] = React.useState(false);
   const cart = useSelector((state: RootState) => state.cart.cart);
   const productInCart = useSelector((state) => selectProductInCart(state, productId));
   const quantity = productInCart?.quantity || 0;
   const newPrice = price - (price * discountPercentage / 100);
   const count = productInCart ? productInCart.quantity : 0;
   const totalPrice = quantity > 0 ? quantity * newPrice : newPrice;
-  // const handleIncrement = () => {
-  //   setCount(count + 1);
-  // };
-
-  // const handleDecrement = () => {
-  //   if (count > 0) {
-  //     setCount(count - 1);
-  //   }
-  // };
-
-  // const handleClick = () => {
-  //   setCount(1);
-  //   setShowButtons(true);
-  // };
-
-  // const totalPrice = count > 0 ? count * newPrice : newPrice;
 
   return (
     <div className="discount__container">

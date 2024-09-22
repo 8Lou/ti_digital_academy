@@ -6,7 +6,6 @@ import cartIcon from '../../assets/img/Cart.svg';
 import {  useSelector } from 'react-redux';
 import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
-import { fetchCart } from '../../store/cartSlice';
 
 interface HeaderProps {
   cart: ReturnType<typeof selectCart> | null;

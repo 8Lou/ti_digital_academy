@@ -24,20 +24,13 @@ const accordionData: AccordionItem[] = [
 ];
 
 const FAQ: React.FC = () => {
-  // const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const [openIndexes, setOpenIndexes] = useState<number[]>([]); 
 
-  // const toggleAccordion = (index: number) => {
-  //   setOpenIndex(openIndex === index ? null : index);
-  // };
-
   const toggleAccordion = (index: number) => {
     if (openIndexes.includes(index)) {
-      // Если этот аккордеон уже открыт, закрыть его
       setOpenIndexes(openIndexes.filter(i => i !== index));
     } else {
-      // Иначе добавляем его в список открытых
       setOpenIndexes([...openIndexes, index]);
     }
   };

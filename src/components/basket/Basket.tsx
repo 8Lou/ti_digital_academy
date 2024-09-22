@@ -1,20 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './basket.css';
 import ShoppingCard from '../shoppingCard/ShoppingCard';
 import Layout from '../layout/Layout';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCart } from '../../store/cartSlice';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../types';
 
-const Basket: React.FC<{ cart: ReturnType<typeof selectCart> | null }> = ({ cart }) => {
-  // const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: RootState) => state.cart);
+const Basket: React.FC = () => {
 
-  // useEffect(() => {
-  //   if (!cart) {
-  //     dispatch(fetchCart(6)); // ID пользователя
-  //   }
-  // }, [dispatch, cart]);
+  const { cart, loading, error } = useSelector((state: RootState) => state.cart);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -51,8 +44,7 @@ const Basket: React.FC<{ cart: ReturnType<typeof selectCart> | null }> = ({ cart
                 price={product.price}
                 discountPercentage={product.discountPercentage}
                 thumbnail={product.thumbnail}
-                quantity={product.quantity}
-              />
+                quantity={product.quantity} description={''}              />
             ))}
           </div>
           <div className="basket__value">
