@@ -6,7 +6,6 @@ import Discount from '../discount/Discount';
 import Layout from '../layout/Layout';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-// import { setNewPrice } from '../../store/cartSlice'; 
 
 interface ProductData {
   id: number;
@@ -68,14 +67,6 @@ const Product: React.FC = () => {
       document.title = product.title;
     }
   }, [product]);
-  
-  // useEffect(() => {
-  //   if (product) {
-  //     dispatch(setNewPrice(newPrice));
-  //   }
-  // }, [newPrice, product, dispatch]);
-
-  
   
   if (loading) {
     return (

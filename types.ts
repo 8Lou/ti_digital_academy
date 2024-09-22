@@ -13,7 +13,6 @@ export interface Product {
     products: Product[];
     totalQuantity: number;
     cart: Cart | null;
-
     loading: boolean;
     error: string | null;
   }

@@ -3,7 +3,6 @@ import './shoppingCard.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { addToCart, removeFromCart } from '../../store/api';
 
 interface ShoppingCardProps {
   id: string;
@@ -61,7 +60,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     <div className="shoppingCard__container">
       <div className="shoppingCard-content">
         <div className="shoppingCard-one">
-          <img className="card__image" src={thumbnail} alt={title} />
+          <img className="shoppingCard__image" src={thumbnail} alt={title} />
         </div>
         <div className="shoppingCard-two">
           <h5 className='card__title' onClick={handleImageClick}>{title}</h5>

@@ -4,7 +4,6 @@ import Button from '../button/Button';
 import Plus from '../../assets/img/Cart-plus.svg';
 import Minus from '../../assets/img/Cart-minus.svg';
 import { useDispatch } from 'react-redux';
-// import { setNewPrice } from '../../store/cartSlice'; 
 
 interface DiscountProps {
   price: number;
@@ -34,11 +33,6 @@ const Discount: React.FC<DiscountProps> = ({ price, discountPercentage,  newPric
   };
 
   const totalPrice = count > 0 ? count * newPrice : newPrice;
-
-  // React.useEffect(() => {
-  //   dispatch(setNewPrice(newPrice));
-  // }, [newPrice, dispatch]); 
-
 
   return (
     <div className="discount__container">

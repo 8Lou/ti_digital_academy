@@ -11,7 +11,6 @@ const Basket: React.FC = () => {
   const { cart, loading, error } = useSelector((state: RootState) => state.cart);
 
   useEffect(() => {
-    console.log()
     const userId = 33; // Хардкодим ID пользователя
     dispatch(fetchCart(userId));
   }, [dispatch]);
@@ -22,6 +21,7 @@ const Basket: React.FC = () => {
   const products = cart?.products || [];
   const totalQuantity = cart?.totalQuantity || 0;
   const totalPrice = products.reduce((acc, product) => acc + product.discountedTotal, 0);
+  const totalPriceWithoutDiscount = products.reduce((acc, product) => acc + (product.price * product.quantity), 0);
 
   if (products.length === 0) {
     return (
@@ -55,9 +55,11 @@ const Basket: React.FC = () => {
             <h4 className="basket__text">
               Total count: <span className="basket__number">{totalQuantity} items</span>
             </h4>
-            <h4 className="basket__text">
+            <h4 className='basket__text'>Price without discount: <span className='basket__number' >${totalPriceWithoutDiscount.toFixed(2)}</span></h4>
+              <hr />
+            <h3 className="basket__text">
               Total price: <span className="basket__number">${totalPrice.toFixed(2)}</span>
-            </h4>
+            </h3>
           </div>
         </div>
       </div>
