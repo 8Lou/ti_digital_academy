@@ -3,7 +3,7 @@ import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../../assets/img/Cart.svg';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
 import { fetchCart } from '../../store/cartSlice';
@@ -13,15 +13,8 @@ interface HeaderProps {
 }
 const Header: React.FC<HeaderProps> = ({ cart }) => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
   const {  loading } = useSelector((state: RootState) => state.cart);
   const totalQuantity = useSelector(selectTotalCartQuantity);
-
-  // useEffect(() => {
-  //   if (!cart) {
-  //     dispatch(fetchCart(33));// ID пользователя
-  //   }
-  // }, [dispatch, cart]);
 
   const handleCartClick = () => {
     navigate('/basket'); 

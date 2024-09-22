@@ -62,6 +62,12 @@
   padding: 17px 0;
 }
 
+.empty{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
 @media (max-width: 900px) {
   .basket__content {
     grid-template-columns: 1fr;

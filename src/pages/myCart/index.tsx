@@ -8,7 +8,7 @@ const MyCart: React.FC = () => {
   usePageTitle('My cart | Goods4you');
   return (
     <div>
-      <Header />
+      <Header cart={undefined} />
       <Basket />
       <Footer />
       </div>

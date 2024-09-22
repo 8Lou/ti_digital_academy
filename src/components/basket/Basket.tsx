@@ -6,14 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCart } from '../../store/cartSlice';
 import { RootState } from '../../../types';
 
-const Basket: React.FC = () => {
-  const dispatch = useDispatch();
-  const { cart, loading, error } = useSelector((state: RootState) => state.cart);
+const Basket: React.FC<{ cart: ReturnType<typeof selectCart> | null }> = ({ cart }) => {
+  // const dispatch = useDispatch();
+  const { loading, error } = useSelector((state: RootState) => state.cart);
 
-  useEffect(() => {
-    const userId = 33; // Хардкодим ID пользователя
-    dispatch(fetchCart(userId));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!cart) {
+  //     dispatch(fetchCart(6)); // ID пользователя
+  //   }
+  // }, [dispatch, cart]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -26,8 +27,11 @@ const Basket: React.FC = () => {
   if (products.length === 0) {
     return (
       <Layout>
-        <div className="basket__container">
-          <h1>No items</h1>
+      <div className="basket__container">
+      <h1 className="basket__title">My cart</h1>
+      <div className="empty">
+          <h3>No items</h3>
+        </div>
         </div>
       </Layout>
     );
