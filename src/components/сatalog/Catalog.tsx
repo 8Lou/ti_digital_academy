@@ -10,6 +10,7 @@ import Layout from '../layout/Layout';
 import  {Product} from  '../../../types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../types';
+import { selectCart } from '../../store/selectors';
 
 interface CatalogProps {
   cart: ReturnType<typeof selectCart> | null;

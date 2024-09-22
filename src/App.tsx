@@ -14,8 +14,10 @@ function App() {
   const cart = useSelector((state: RootState) => state.cart.cart);
 
   useEffect(() => {
-    dispatch(fetchCart(33)); // ID пользователя
-  }, [dispatch]);
+    if (!cart) {
+      dispatch(fetchCart(33));// ID пользователя
+    }
+  }, [dispatch, cart]);
 
   return (
     <Router>

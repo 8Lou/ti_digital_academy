@@ -8,8 +8,8 @@ const Home: React.FC = () => {
   usePageTitle('Catalog | Goods4you');
   return (
     <div className="home">
-      <Header />
-      <Catalog />
+      <Header cart={undefined} />
+      <Catalog cart={null} />
       <Footer />
       </div>
   );

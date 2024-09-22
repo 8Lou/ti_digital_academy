@@ -8,16 +8,20 @@ import { RootState } from '../../../types';
 import { selectTotalCartQuantity } from '../../store/selectors';
 import { fetchCart } from '../../store/cartSlice';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  cart: ReturnType<typeof selectCart> | null;
+}
+const Header: React.FC<HeaderProps> = ({ cart }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { cart, loading } = useSelector((state: RootState) => state.cart);
+  // const dispatch = useDispatch();
+  const {  loading } = useSelector((state: RootState) => state.cart);
   const totalQuantity = useSelector(selectTotalCartQuantity);
 
-  useEffect(() => {
-    // Загружаем данные корзины при первом отображении компонента
-    dispatch(fetchCart(33)); // ID пользователя
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (!cart) {
+  //     dispatch(fetchCart(33));// ID пользователя
+  //   }
+  // }, [dispatch, cart]);
 
   const handleCartClick = () => {
     navigate('/basket'); 

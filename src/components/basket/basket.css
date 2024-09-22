@@ -62,8 +62,13 @@
   padding: 17px 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .basket__content {
     grid-template-columns: 1fr;
+  }
+  
+  .basket__item {
+    flex-direction: column;
+    height: fit-content;
   }
 }

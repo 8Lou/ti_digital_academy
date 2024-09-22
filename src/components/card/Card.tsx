@@ -13,9 +13,10 @@ interface CardProps {
     setCart: React.Dispatch<React.SetStateAction<{ [key: number]: number | undefined }>>;
 }
 
-const Card: React.FC<CardProps> = ({ product, cart, setCart }) => {
+const Card: React.FC<CardProps> = ({ product, setCart }) => {
 
     const navigate = useNavigate();
+    const { cart } = useSelector((state: RootState) => state.cart);
     const { id, title, thumbnail, price, discountPercentage } = product;
     const productInCart = useSelector((state) => selectProductInCart(state, id));
     const quantity = productInCart?.quantity || (cart && cart[id]) || 0;
