@@ -8,16 +8,25 @@ import Faq from '../faq/Faq';
 import Button from '../button/Button';
 import Layout from '../layout/Layout';
 import  {Product} from  '../../../types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../types';
 
-const Catalog: React.FC = () => {
-  const [products, setProducts] = useState([]);
+interface CatalogProps {
+  cart: ReturnType<typeof selectCart> | null;
+}
+
+const Catalog: React.FC<CatalogProps> = () => {
+
+  const [products, setProducts] = useState<Product[]>([]);
   const [query, setQuery] = useState('');
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   const fetchProducts = useCallback(async () => {
     const response = await fetch(`https://dummyjson.com/products/search?q=${query}&limit=12&skip=${skip}`);
     const data = await response.json();
+
     setProducts(prev => skip === 0 ? data.products : [...prev, ...data.products]);
     setTotal(data.total);
   }, [query, skip]);
@@ -55,7 +64,7 @@ const Catalog: React.FC = () => {
 
           <div className="catalog__card-grid">
             {products.map((product: Product) => (
-              <Card key={product.id} product= {product}/>
+              <Card key={product.id} product={product} cart={cart} setCart={() => {}} />
             ))}
           </div>
 

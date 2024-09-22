@@ -5,7 +5,8 @@ import inactiveStarIcon from '../../assets/img/StarRed.svg';
 import Discount from '../discount/Discount';
 import Layout from '../layout/Layout';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../types';
 
 interface ProductData {
   id: number;
@@ -31,6 +32,8 @@ const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.cart);
+  const productInCart = cart?.products.find((product) => product.id === product.id);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -137,7 +140,8 @@ const Product: React.FC = () => {
             ))}
           </div>
           <h5 className="one__product-ships">Price: ${product.price}</h5>
-          <Discount price={product.price} discountPercentage={product.discountPercentage} newPrice={newPrice} />
+          <Discount price={product.price} productId={product.id} discountPercentage={product.discountPercentage} quantity={productInCart?.quantity || 0}
+newPrice={newPrice} />
         </div>
       </div>
     </Layout>

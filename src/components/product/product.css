@@ -8,10 +8,13 @@
   max-width: 520px;
 }
 .one__product-main-image {
-  height: 520px;
-  width: auto;
+  max-height: 520px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center; 
   border: 1px solid var(--color-link--primary-hover);
   border-radius: 0.38rem;
+  overflow: hidden; 
 }
 
 .one__product-slider {

@@ -3,8 +3,20 @@ import Home from './pages/home';
 import OneProduct from './pages/oneProduct';
 import Undefined from './pages/404';
 import MyCart from './pages/myCart';
+import { RootState } from '../types';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCart } from './store/cartSlice';
 
 function App() {
+  
+  const dispatch = useDispatch();
+  const cart = useSelector((state: RootState) => state.cart.cart);
+
+  useEffect(() => {
+    dispatch(fetchCart(33)); // ID пользователя
+  }, [dispatch]);
+
   return (
     <Router>
       <Routes>

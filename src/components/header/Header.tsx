@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../../assets/img/Cart.svg';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../types'; 
+import { selectTotalCartQuantity } from '../../store/selectors';
+import { fetchCart } from '../../store/cartSlice';
 
 const Header: React.FC = () => {
-  const navigate = useNavigate(); 
-  const { cart } = useSelector((state: RootState) => state.cart);
-  const totalQuantity = cart?.totalQuantity || 0;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { cart, loading } = useSelector((state: RootState) => state.cart);
+  const totalQuantity = useSelector(selectTotalCartQuantity);
+
+  useEffect(() => {
+    // Загружаем данные корзины при первом отображении компонента
+    dispatch(fetchCart(33)); // ID пользователя
+  }, [dispatch]);
 
   const handleCartClick = () => {
     navigate('/basket'); 
@@ -40,7 +48,7 @@ const Header: React.FC = () => {
         <Link to="/" onClick={handleFaqClick}>FAQ</Link>
           <span className="cart-link" onClick={handleCartClick}>
             Cart
-            {totalQuantity > 0 && (
+            {!loading && totalQuantity > 0 && (
               <span className="cart__badge">{totalQuantity}</span>
             )}
             <span className="cart-icon">

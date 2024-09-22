@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   gap: 30px;
-  padding: 206px 130px 115px; 
+  padding: 115px 130px; 
   background-color: var(--color-background-primary);
 }
 
