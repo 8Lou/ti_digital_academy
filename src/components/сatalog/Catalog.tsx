@@ -33,7 +33,12 @@ const Catalog: React.FC<CatalogProps> = () => {
   }, [query, skip]);
 
   useEffect(() => {
-    fetchProducts();
+    const debounceFetch = debounce(fetchProducts, 300);
+    debounceFetch();
+
+    return () => {
+      debounceFetch.cancel();
+    };
   }, [fetchProducts, query, skip]);
 
   const debouncedSearch = useCallback(

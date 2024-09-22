@@ -1,15 +1,17 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import AccordionItem from './AccordionItem';
-import plusIcon from '../../assets/img/Plus.svg';
-import closeIcon from '../../assets/img/Close.svg';
+import Accordion from './Accordion';
+import plusIcon from '../../../../assets/img/Plus.svg';
+import closeIcon from '../../../../assets/img/Close.svg';
+import Faq from '../../Faq';
+import './accordion.css';
+import { ComponentMeta } from '@storybook/react';
 
 export default {
-  title: 'Molecules/AccordionItem',
-  component: AccordionItem,
-} as ComponentMeta<typeof AccordionItem>;
+  title: 'Molecules/Faq',
+  component: Faq,
+} as ComponentMeta<typeof Accordion>;
 
-const Template: ComponentStory<typeof AccordionItem> = (args) => <AccordionItem {...args} />;
+const Template = () => <Faq />;
 
 export const Closed = Template.bind({});
 Closed.args = {
