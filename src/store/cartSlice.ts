@@ -20,7 +20,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (userId: numbe
   }
   const data = await response.json();
   if (!data.carts || !Array.isArray(data.carts) || data.carts.length === 0) {
-    throw new Error('У данного пользователя корзины пока нет');
+    throw new Error('У Вас корзины нет пока...');
   }
   return data.carts[0];
 });

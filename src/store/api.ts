@@ -1,15 +1,38 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { Cart } from '../../types';
 
+const baseQuery = fetchBaseQuery({
+  baseUrl: 'https://dummyjson.com',
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
 export const cartApi = createApi({
   reducerPath: 'cartApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://dummyjson.com' }),
+  baseQuery,
   endpoints: (builder) => ({
+
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: '/auth/login',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+    getUser: builder.query({
+      query: () => '/user',
+    }),
+
     getAllCarts: builder.query<Cart[], void>({
-      query: () => 'carts',
+      query: () => '/carts',
     }),
     getCartById: builder.query<Cart, number>({
-      query: (cartId) => `carts/user/${cartId}`,
+      query: (cartId) => `/carts/${cartId}`,
     }),
     getCartsByUser: builder.query<Cart, number>({
       query: (userId) => `carts/user/${userId}`,
@@ -21,7 +44,7 @@ export const cartApi = createApi({
         body,
       }),
     }),
-    updateCart: builder.mutation<Cart, { id: number; body: number }>({
+    updateCart: builder.mutation<Cart, { id: number; body: Partial<Cart> }>({
       query: ({ id, body }) => ({
         url: `carts/${id}`,
         method: 'PUT',
@@ -44,4 +67,6 @@ export const {
   useAddCartMutation,
   useUpdateCartMutation,
   useDeleteCartMutation,
+  useLoginMutation,
+  useGetUserQuery,
 } = cartApi;
