@@ -1,49 +1,67 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from './pages/home';
 import OneProduct from './pages/oneProduct';
 import Undefined from './pages/404';
 import MyCart from './pages/myCart';
 import Login from './pages/login/login';
-import { RootState } from '../types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchCart } from './store/cartSlice';
-import { useGetUserQuery } from './store/api';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
+import { selectCart } from './store/selectors';
+import { jwtDecode } from 'jwt-decode';
 
 function AppRoutes() {
-    const dispatch = useDispatch();
-    // const { cart, loading, error } = useSelector((state: RootState) => state.cart);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentUser, setCurrentUser] = useState(null);
     const token = localStorage.getItem('token');
+    const cart = useSelector(selectCart);
   
-  const { data: user, isFetching, isError } = useGetUserQuery(undefined, {
-    skip: !token, // Пропустить запрос, если токена нет
-  });
-
-
-useEffect(() => {
-    if (token) {
-      dispatch(fetchCart(10)); // ID пользователя
-    } else {
-      // Если токена нет, редирект на страницу логина
-      setIsLoading(false);
-    }
-  }, [dispatch, token]);
-
-  useEffect(() => {
-    if (isFetching) {
-      setIsLoading(true); // Пока идет запрос на получение пользователя
-    } else {
-      setIsLoading(false); // Запрос завершен
-    }
-  }, [isFetching]);
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) {
-    return <Navigate to="/login" />;
-  }
+    useEffect(() => {
+      const checkAuth = async () => {
+        if (!token) {
+          setIsLoading(false);
+          return;
+        }  
+        try {
+          const decodedToken = jwtDecode<{ exp: number }>(token);
+          if (decodedToken.exp * 1000 < Date.now()) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+            setIsLoading(false);
+            return;
+          }  
+          const response = await fetch('https://dummyjson.com/auth/me', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+            },
+            credentials: 'include',
+          });
+  
+          if (!response.ok) {
+            throw new Error('Ошибка при получении пользователя');
+          }
+  
+          const user = await response.json();
+          setCurrentUser(user);
+        } catch (error) {
+          console.error('Ошибка при проверке авторизации:', error);
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+  
+      checkAuth();
+    }, [token]);
+  
+    if (isLoading) return <div>Loading...</div>;  
 
     return (
+        <>
+            <Header user={currentUser} cart={cart} />
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/" element={<Home />} />
@@ -52,6 +70,8 @@ useEffect(() => {
                 <Route path="/undefined" element={<Undefined />} />
                 <Route path="*" element={<Navigate to="/404" />} />
             </Routes>
+            <Footer />
+        </>
     );
 }
 

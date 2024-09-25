@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLoginMutation } from '../../store/api';
 import { useNavigate } from 'react-router-dom';
 import './auth.css';
 import usePageTitle from '../../hooks/usePageTitle';
+import { jwtDecode } from 'jwt-decode';
 
 const Auth: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -11,26 +12,40 @@ const Auth: React.FC = () => {
   const navigate = useNavigate();
 
   usePageTitle('Sign in | Goods4you');
-  
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/home');
-    }
-  }, [navigate]);
-  
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
     try {
-      const response = await login({ username, password }).unwrap();
-      localStorage.setItem('token', response.token);
-      navigate('/home');
-    } catch (err) {
-      console.error('Login failed:', err);
+      const response = await fetch('https://dummyjson.com/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username,
+          password,
+          expiresInMins: 30,
+        }),
+        credentials: 'include',
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка при логине');
+      }
+
+      const data = await response.json();
+      console.log(data);
+
+      if (data.accessToken) {
+        localStorage.setItem('token', data.accessToken);
+      }
+
+      const decodedToken = jwtDecode<{ userId: string }>(data.accessToken);
+      localStorage.setItem('userId', decodedToken.userId);
+
+      navigate('/');
+    } catch (error) {
+      console.error('Ошибка:', error);
     }
   };
-
 
   return (
     <div className="login-container">
@@ -59,7 +74,7 @@ const Auth: React.FC = () => {
         <button type="submit" disabled={isLoading}>
           {isLoading ? 'Logging in...' : 'Login'}
         </button>
-        {error && <p className="Неверный логин или пароль">{error.message}</p>}
+        {error && <p className="Неверный логин или пароль"></p>}
       </form>
     </div>
   );

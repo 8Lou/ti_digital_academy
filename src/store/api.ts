@@ -3,6 +3,9 @@ import { Cart } from '../../types';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://dummyjson.com',
+  
+  credentials: 'include', // куки для всех запросов
+
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -24,8 +27,9 @@ export const cartApi = createApi({
         body: credentials,
       }),
     }),
-    getUser: builder.query({
-      query: () => '/user',
+    
+    getCurrentUser: builder.query({
+      query: () => '/user/me',
     }),
 
     getAllCarts: builder.query<Cart[], void>({
@@ -68,5 +72,5 @@ export const {
   useUpdateCartMutation,
   useDeleteCartMutation,
   useLoginMutation,
-  useGetUserQuery,
+  useGetCurrentUserQuery,
 } = cartApi;

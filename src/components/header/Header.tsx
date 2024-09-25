@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate, Link } from 'react-router-dom';
@@ -6,11 +6,17 @@ import cartIcon from '../../assets/img/Cart.svg';
 import {  useSelector } from 'react-redux';
 import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
+import { selectCart } from '../../store/selectors';
 
 interface HeaderProps {
+  user: {
+    firstName: string;
+    lastName: string;
+  } | null;
   cart: ReturnType<typeof selectCart> | null;
 }
-const Header: React.FC<HeaderProps> = ({ cart }) => {
+
+const Header: React.FC<HeaderProps> = ({ user, cart }) => {
   const navigate = useNavigate();
   const {  loading } = useSelector((state: RootState) => state.cart);
   const totalQuantity = useSelector(selectTotalCartQuantity);
@@ -30,18 +36,14 @@ const Header: React.FC<HeaderProps> = ({ cart }) => {
       }
     }, 100); 
   };
-  
-  const handleUserClick = () => {
-    navigate('/undefined'); 
-  };
 
   return (
     <header className="header">
       <div className="header__content">
         <Logo />
         <nav className="header__nav">
-        <Link to="/" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>Catalog</Link>
-        <Link to="/" onClick={handleFaqClick}>FAQ</Link>
+          <Link to="/" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>Catalog</Link>
+          <Link to="/" onClick={handleFaqClick}>FAQ</Link>
           <span className="cart-link" onClick={handleCartClick}>
             Cart
             {!loading && totalQuantity > 0 && (
@@ -51,7 +53,13 @@ const Header: React.FC<HeaderProps> = ({ cart }) => {
               <img src={cartIcon} className='menu__cart-svg' alt='Иконка корзины' />
             </span>
           </span>
-          <Link to="/undefined" onClick={handleUserClick} >Johnson Smith</Link>
+          {user ? (
+            <span>
+              {user.firstName} {user.lastName}
+            </span>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
         </nav>
       </div>
     </header>
