@@ -1,0 +1,124 @@
+/* сard.css */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-link-primary);
+  border: 1px solid var(--color-link--primary-hover);
+  border-radius: 0.38rem;
+  height: 370px;
+  width: 370px;
+  position: relative;
+}
+
+.card__image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card__content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  padding-top: 3px;
+  font-size: var(--font-size-m);
+}
+
+.card__image {
+  transition: filter 0.3s ease;
+}
+
+.card:hover .card__image {
+  background-color: var(--color-link--primary-hover);
+  opacity: 0.5;
+}
+
+.card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 26px;
+  font-weight: 900;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 10px rgba(213, 213, 213, 0.5);
+}
+
+.card:hover .card__overlay {
+  opacity: 1;
+  z-index: 1;
+}
+
+.card__title {
+  font-weight: var(--font-weight-semibold);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.card__title:hover {
+  text-decoration: underline;
+}
+
+.price {
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-primary);
+}
+
+.cart__button {
+  display: flex;
+}
+
+.cart__button:hover {
+  background-color: var(--color-button-background-hover);
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  white-space: nowrap;  
+  margin-right: -20px;
+}
+
+.cart__count {
+  padding: 15px 26px; 
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    margin: 0 1%;
+  }
+
+  .card:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    margin: 0 1%;
+  }
+
+  .card:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card {
+    margin-right: 0;
+  }
+}

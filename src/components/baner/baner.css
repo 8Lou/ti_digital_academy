@@ -1,0 +1,23 @@
+/* baner.css */
+.baner {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 108px 0; 
+}
+
+.baner__title {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.4;
+}
+
+.baner__text {
+  color: var(--color-link-primary);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.5;
+}
+
+.button{
+  padding: 1.25rem 3.13rem;
+}
