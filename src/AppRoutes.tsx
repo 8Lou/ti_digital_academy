@@ -10,53 +10,57 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import { selectCart } from './store/selectors';
 import { jwtDecode } from 'jwt-decode';
+import { useGetCurrentUserQuery } from './store/api';
 
 function AppRoutes() {
-    const [isLoading, setIsLoading] = useState(true);
+    // const [isLoading, setIsLoading] = useState(true);
     const [currentUser, setCurrentUser] = useState(null);
-    const token = localStorage.getItem('token');
+    // const token = localStorage.getItem('token');
     const cart = useSelector(selectCart);
   
-    useEffect(() => {
-      const checkAuth = async () => {
-        if (!token) {
-          setIsLoading(false);
-          return;
-        }  
-        try {
-          const decodedToken = jwtDecode<{ exp: number }>(token);
-          if (decodedToken.exp * 1000 < Date.now()) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('userId');
-            setIsLoading(false);
-            return;
-          }  
-          const response = await fetch('https://dummyjson.com/auth/me', {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${token}`,
-            },
-            credentials: 'include',
-          });
+    // useEffect(() => {
+    //   const checkAuth = async () => {
+    //     if (!token) {
+    //       setIsLoading(false);
+    //       return;
+    //     }  
+    //     try {
+    //       const decodedToken = jwtDecode<{ exp: number }>(token);
+    //       if (decodedToken.exp * 1000 < Date.now()) {
+    //         localStorage.removeItem('token');
+    //         localStorage.removeItem('userId');
+    //         setIsLoading(false);
+    //         return;
+    //       }  
+    //       const response = await fetch('https://dummyjson.com/auth/me', {
+    //         method: 'GET',
+    //         headers: {
+    //           'Authorization': `Bearer ${token}`,
+    //         },
+    //         // credentials: 'include',
+    //       });
   
-          if (!response.ok) {
-            throw new Error('Ошибка при получении пользователя');
-          }
+    //       if (!response.ok) {
+    //         throw new Error('Ошибка при получении пользователя');
+    //       }
   
-          const user = await response.json();
-          setCurrentUser(user);
-        } catch (error) {
-          console.error('Ошибка при проверке авторизации:', error);
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
-        } finally {
-          setIsLoading(false);
-        }
-      };
+    //       const user = await response.json();
+    //       setCurrentUser(user);
+    //     } catch (error) {
+    //       console.error('Ошибка при проверке авторизации:', error);
+    //       localStorage.removeItem('token');
+    //       localStorage.removeItem('userId');
+    //     } finally {
+    //       setIsLoading(false);
+    //     }
+    //   };
   
-      checkAuth();
-    }, [token]);
-  
+    //   checkAuth();
+    // }, [token]);
+
+    const { data, error, isLoading } = useGetCurrentUserQuery('userId')
+    console.log(data)
+
     if (isLoading) return <div>Loading...</div>;  
 
     return (

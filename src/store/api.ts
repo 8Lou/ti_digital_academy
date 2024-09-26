@@ -4,7 +4,7 @@ import { Cart } from '../../types';
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://dummyjson.com',
   
-  credentials: 'include', // куки для всех запросов
+  // credentials: 'include', // куки для всех запросов
 
   prepareHeaders: (headers) => {
     const token = localStorage.getItem('token');
@@ -15,16 +15,19 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-export const cartApi = createApi({
+export const api = createApi({
   reducerPath: 'cartApi',
   baseQuery,
   endpoints: (builder) => ({
 
     login: builder.mutation({
-      query: (credentials) => ({
+      query: (body) => ({
         url: '/auth/login',
         method: 'POST',
-        body: credentials,
+        headers: { 'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin' : '*'
+         },
+        body,
       }),
     }),
     
@@ -73,4 +76,4 @@ export const {
   useDeleteCartMutation,
   useLoginMutation,
   useGetCurrentUserQuery,
-} = cartApi;
+} = api;

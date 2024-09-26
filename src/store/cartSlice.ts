@@ -15,7 +15,7 @@ const initialState: CartState = {
 
 export const fetchCart = createAsyncThunk('cart/fetchCart', async (userId: number) => {
   const response = await fetch(`https://dummyjson.com/carts/user/${userId}`, {
-  credentials: 'include',
+  // credentials: 'include',
 });
   if (!response.ok) {
     throw new Error('Failed to fetch cart');

@@ -5,8 +5,7 @@ import inactiveStarIcon from '../../assets/img/StarRed.svg';
 import Discount from '../discount/Discount';
 import Layout from '../layout/Layout';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../types';
+import {  useAppSelector } from '../../hooks/store-hooks';
 
 interface ProductData {
   id: number;
@@ -31,8 +30,7 @@ const Product: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
-  const dispatch = useDispatch();
-  const cart = useSelector((state: RootState) => state.cart.cart);
+  const cart = useAppSelector(state => state.cart.cart);
   const productInCart = cart?.products.find((product) => product.id === product.id);
 
   useEffect(() => {

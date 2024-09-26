@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './basket.css';
 import ShoppingCard from '../shoppingCard/ShoppingCard';
 import Layout from '../layout/Layout';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../types';
+import { fetchCart } from '../../store/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
+import { useGetCurrentUserQuery } from '../../store/api';
 
 const Basket: React.FC = () => {
+  
+  const dispatch = useAppDispatch();
+  const { cart, loading, error } = useAppSelector(state => state.cart);
 
-  const { cart, loading, error } = useSelector((state: RootState) => state.cart);
+  const { data: user, isLoading } = useGetCurrentUserQuery('userId')
 
+  if (isLoading) return <div>Loading...</div>;  
+
+  useEffect(() => {
+  if (!cart && user) {
+    dispatch(fetchCart(user.id)); // ID пользователя
+  }
+}, [dispatch, cart, user]);  
+  
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  
   const products = cart?.products || [];
   const totalQuantity = cart?.totalQuantity || 0;
   const totalPrice = products.reduce((acc, product) => acc + product.discountedTotal, 0);

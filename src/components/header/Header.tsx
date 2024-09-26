@@ -7,6 +7,7 @@ import {  useSelector } from 'react-redux';
 import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
 import { selectCart } from '../../store/selectors';
+import { useGetCurrentUserQuery } from '../../store/api';
 
 interface HeaderProps {
   user: {
@@ -16,10 +17,12 @@ interface HeaderProps {
   cart: ReturnType<typeof selectCart> | null;
 }
 
-const Header: React.FC<HeaderProps> = ({ user, cart }) => {
+const Header: React.FC<HeaderProps> = ({ cart }) => {
   const navigate = useNavigate();
   const {  loading } = useSelector((state: RootState) => state.cart);
   const totalQuantity = useSelector(selectTotalCartQuantity);
+
+  const { data: user } = useGetCurrentUserQuery('userId')
 
   const handleCartClick = () => {
     navigate('/basket'); 
