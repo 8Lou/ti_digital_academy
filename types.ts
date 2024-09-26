@@ -24,6 +24,7 @@ export interface Product {
   }
 
   export interface RootState {
+    userId: any;
     cart: CartState;
   }
   

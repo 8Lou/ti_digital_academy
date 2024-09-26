@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../../assets/img/Cart.svg';
-import {  useSelector } from 'react-redux';
+import {  useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
 import { selectCart } from '../../store/selectors';
 import { useGetCurrentUserQuery } from '../../store/api';
+import { fetchCart } from '../../store/cartSlice';
 
 interface HeaderProps {
   user: {
@@ -19,10 +20,16 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ cart }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {  loading } = useSelector((state: RootState) => state.cart);
   const totalQuantity = useSelector(selectTotalCartQuantity);
-
   const { data: user } = useGetCurrentUserQuery('userId')
+
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCart(user.id));
+    }
+  }, [user, dispatch]);
 
   const handleCartClick = () => {
     navigate('/basket'); 

@@ -18,7 +18,7 @@ export const fetchCart = createAsyncThunk('cart/fetchCart', async (userId: numbe
   // credentials: 'include',
 });
   if (!response.ok) {
-    throw new Error('Failed to fetch cart');
+    throw new Error('Ошибка при загрузке данных корзины');
   }
   const data = await response.json();
   if (!data.carts || !Array.isArray(data.carts) || data.carts.length === 0) {
