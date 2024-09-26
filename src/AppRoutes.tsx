@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Home from './pages/home';
 import OneProduct from './pages/oneProduct';
 import Undefined from './pages/404';
@@ -13,11 +13,32 @@ import { jwtDecode } from 'jwt-decode';
 import { useGetCurrentUserQuery } from './store/api';
 
 function AppRoutes() {
-    // const [isLoading, setIsLoading] = useState(true);
-    const [currentUser, setCurrentUser] = useState(null);
-    // const token = localStorage.getItem('token');
-    const cart = useSelector(selectCart);
-  
+  // const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  const cart = useSelector(selectCart);
+  const navigate = useNavigate();
+  const userId = localStorage.getItem('userId');
+  const { data, error, isLoading } = useGetCurrentUserQuery(userId)
+  const token = localStorage.getItem('token');
+
+    useEffect(() => {
+      if (!token) {
+          navigate('/login');
+          return;
+      }
+
+      const decodedToken = jwtDecode<{ exp: number }>(token);
+      if (decodedToken.exp * 1000 < Date.now()) { //срок действия
+          localStorage.removeItem('token');
+          localStorage.removeItem('userId');
+          navigate('/login');
+          return;
+      }
+      if (data) {
+        setCurrentUser(data);
+    }
+}, [data, navigate, token]);
+
     // useEffect(() => {
     //   const checkAuth = async () => {
     //     if (!token) {
@@ -58,10 +79,7 @@ function AppRoutes() {
     //   checkAuth();
     // }, [token]);
 
-    const { data, error, isLoading } = useGetCurrentUserQuery('userId')
-    console.log(data)
-
-    if (isLoading) return <div>Loading...</div>;  
+  if (isLoading) return <div>Loading...</div>;
 
     return (
         <>

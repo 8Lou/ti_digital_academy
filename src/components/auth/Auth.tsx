@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLoginMutation } from '../../store/api';
 import { useNavigate } from 'react-router-dom';
 import './auth.css';
@@ -50,7 +50,19 @@ const Auth: React.FC = () => {
   //   }
   // };
 
-  console.log(data)
+  // console.log(data)
+
+  useEffect(() => {
+    if (data?.accessToken) {
+      localStorage.setItem('token', data.accessToken);
+
+      const decodedToken = jwtDecode<{ userId: string }>(data.accessToken);
+      localStorage.setItem('userId', decodedToken.userId);
+
+      navigate('/');
+    }
+  }, [data, navigate]);
+
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -60,15 +72,6 @@ const Auth: React.FC = () => {
       expiresInMins: 30,
     }))
   };
-
-  if (data?.accessToken) {
-    localStorage.setItem('token', data.accessToken);
-
-    const decodedToken = jwtDecode<{ userId: string }>(data.accessToken);
-    localStorage.setItem('userId', decodedToken.userId);
-
-    navigate('/');
-  }
 
   return (
     <Layout>
