@@ -81,31 +81,27 @@ const Auth: React.FC = () => {
   return (
     <Layout>
 
-      <div className="login-container">
-        <h2>Sign in</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="username">Username</label>
+      <div className="login__container">
+        <h2 className='auth__title'>Sign in</h2>
+        <form onSubmit={handleSubmit} className='auth__form'>
             <input
               type="text"
               id="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
+              placeholder='Login'
             />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
+            <input className='auth__input'
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              placeholder='Password'
             />
-          </div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? 'Logging in...' : 'Login'}
+          <button type="submit" disabled={isLoading} className='auth__button'>
+            {isLoading ? 'Loading...' : 'Sign in'}
           </button>
           {error && <p className="Неверный логин или пароль"></p>}
         </form>

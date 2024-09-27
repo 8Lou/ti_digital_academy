@@ -1,0 +1,39 @@
+/* auth.css */
+.login__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh; */
+}
+.auth__title{
+    margin: 92px auto 48px;
+    font-size: 36px;
+    font-weight: 700;
+}
+.auth__form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    padding: 60px;
+    border: 1px solid var(--color-link--primary-hover);
+border-radius: 4px;
+}
+input {
+    font-size: var(--font-size-m);
+    color: var(--color-background-primary);
+    background-color: var(--color-background-secondary);
+    border-radius: 4px;
+    height: 3.8rem;
+    width: 100%;
+    padding: 20px;
+    border: none;
+  }
+  .auth__input{
+    width: 480px;
+    height: 62px;
+  }
+  .auth__button{
+    width: 177px;
+  }
