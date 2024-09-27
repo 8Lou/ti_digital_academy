@@ -57,8 +57,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
     dispatch(updateCartQuantity({ cartId, productId, quantity }));
   };
 
+  const isAddToCartVisible = quantity === 0; // Проверяем, видна ли кнопка "Add to Cart"
+
   return (
-    <div className="shoppingCard__container">
+    <div className={`shoppingCard__container ${isAddToCartVisible ? 'overlay' : ''}`}>
       <div className="shoppingCard-content">
         <div className="shoppingCard-one">
           <img className="shoppingCard__image" src={thumbnail} alt={title} />
@@ -69,7 +71,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
         </div>
       </div>
       <div className="shoppingCard-three">
-        {quantity === 0 ? (
+        {quantity === 0 && isAddToCartVisible ? (
           <Button className='cart__button' onClick={handleAddToCart} label='Add to Cart'>
             <img src="src/assets/img/Cart.svg" alt="Кнопка Корзина" />
           </Button>

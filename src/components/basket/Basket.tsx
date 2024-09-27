@@ -18,7 +18,7 @@ const Basket: React.FC = () => {
   }, [dispatch, cart, user]);  
   
   
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="loader"></div>;
   if (error || !cart) return <div>Error: {error}</div>;
   
   const products = cart.products || [];
