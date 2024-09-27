@@ -44,7 +44,7 @@ const Header = () => {
         <nav className="header__nav">
           <Link to="/" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>Catalog</Link>
           <Link to="/" onClick={handleFaqClick}>FAQ</Link>
-          <span className="cart-link" onClick={handleCartClick}>
+          <Link to="/basket" className="cart-link" onClick={handleCartClick}>
             Cart
             {!loading && totalQuantity > 0 && (
               <span className="cart__badge">{totalQuantity}</span>
@@ -52,7 +52,7 @@ const Header = () => {
             <span className="cart-icon">
               <img src={cartIcon} className='menu__cart-svg' alt='Иконка корзины' />
             </span>
-          </span>
+          </Link>
           {user ? (
             <span>
               {user.firstName} {user.lastName}

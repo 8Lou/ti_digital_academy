@@ -17,54 +17,15 @@ const Auth: React.FC = () => {
 
   usePageTitle('Sign in | Goods4you');
 
-  // const handleSubmit = async (event: React.FormEvent) => {
-  //   event.preventDefault();
-  //   try {
-  //     const response = await fetch('https://dummyjson.com/auth/login', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json',
-  //         'Access-Control-Allow-Origin' : '*'
-  //        },
-  //       body: JSON.stringify({
-  //         username,
-  //         password,
-  //         expiresInMins: 30,
-  //       }),
-  //       // credentials: 'include',
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error('Ошибка при логине');
-  //     }
-
-  //     const data = await response.json();
-  //     console.log(data);
-
-  //     if (data.accessToken) {
-  //       localStorage.setItem('token', data.accessToken);
-  //     }
-
-  //     const decodedToken = jwtDecode<{ userId: string }>(data.accessToken);
-  //     localStorage.setItem('userId', decodedToken.userId);
-
-  //     navigate('/');
-  //   } catch (error) {
-  //     console.error('Ошибка:', error);
-  //   }
-  // };
-
-  // console.log(data)
-
   useEffect(() => {
     if (data?.accessToken) {
       localStorage.setItem('token', data.accessToken);
       const decodedToken = jwtDecode<{ userId: number }>(data.accessToken);
-      // console.log('Decoded Token:', decodedToken);
 
-      const userId = decodedToken.id; // Взять id из декодированного токена
+      const userId = decodedToken.id;
 
       if (userId) {
-        localStorage.setItem('userId', userId.toString()); // Сохр userId как строку
+        localStorage.setItem('userId', userId.toString());
         dispatch(fetchCart(userId));
         navigate('/');
       } else {
@@ -77,6 +38,8 @@ const Auth: React.FC = () => {
     event.preventDefault();
     await login({ username, password, expiresInMins: 30 });
   };
+
+  if (isLoading) return <div className="loader"></div>;
 
   return (
     <Layout>

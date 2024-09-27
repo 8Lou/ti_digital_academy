@@ -72,7 +72,7 @@ const Product: React.FC = () => {
   if (loading) {
     return (
       <Layout>
-        <div>Loading...</div>
+        <div className="loader"></div>
       </Layout>
     );
   }

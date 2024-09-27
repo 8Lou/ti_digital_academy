@@ -13,7 +13,6 @@ import { jwtDecode } from 'jwt-decode';
 import { useGetCurrentUserQuery } from './store/api';
 
 function AppRoutes() {
-  // const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const cart = useSelector(selectCart);
   const navigate = useNavigate();
@@ -39,47 +38,7 @@ function AppRoutes() {
     }
 }, [data, navigate, token]);
 
-    // useEffect(() => {
-    //   const checkAuth = async () => {
-    //     if (!token) {
-    //       setIsLoading(false);
-    //       return;
-    //     }  
-    //     try {
-    //       const decodedToken = jwtDecode<{ exp: number }>(token);
-    //       if (decodedToken.exp * 1000 < Date.now()) {
-    //         localStorage.removeItem('token');
-    //         localStorage.removeItem('userId');
-    //         setIsLoading(false);
-    //         return;
-    //       }  
-    //       const response = await fetch('https://dummyjson.com/auth/me', {
-    //         method: 'GET',
-    //         headers: {
-    //           'Authorization': `Bearer ${token}`,
-    //         },
-    //         // credentials: 'include',
-    //       });
-  
-    //       if (!response.ok) {
-    //         throw new Error('Ошибка при получении пользователя');
-    //       }
-  
-    //       const user = await response.json();
-    //       setCurrentUser(user);
-    //     } catch (error) {
-    //       console.error('Ошибка при проверке авторизации:', error);
-    //       localStorage.removeItem('token');
-    //       localStorage.removeItem('userId');
-    //     } finally {
-    //       setIsLoading(false);
-    //     }
-    //   };
-  
-    //   checkAuth();
-    // }, [token]);
-
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="loader"></div>;
 
     return (
         <>
