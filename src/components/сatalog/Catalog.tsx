@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { debounce } from 'lodash';
 import './catalog.css';
 import Search from '../searche/Search';
@@ -7,22 +7,14 @@ import Baner from '../baner/Baner';
 import Faq from '../faq/Faq';
 import Button from '../button/Button';
 import Layout from '../layout/Layout';
-import  {Product} from  '../../../types';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../types';
-import { selectCart } from '../../store/selectors';
+import { Product } from '../../../types';
 
-interface CatalogProps {
-  cart: ReturnType<typeof selectCart> | null;
-}
-
-const Catalog: React.FC<CatalogProps> = () => {
+const Catalog = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [query, setQuery] = useState('');
   const [skip, setSkip] = useState(0);
   const [total, setTotal] = useState(0);
-  const cart = useSelector((state: RootState) => state.cart.cart);
 
   const fetchProducts = useCallback(async () => {
     const response = await fetch(`https://dummyjson.com/products/search?q=${query}&limit=12&skip=${skip}`);
@@ -70,7 +62,7 @@ const Catalog: React.FC<CatalogProps> = () => {
 
           <div className="catalog__card-grid">
             {products.map((product: Product) => (
-              <Card key={product.id} product={product} cart={cart} setCart={() => {}} />
+              <Card key={product.id} product={product} />
             ))}
           </div>
 

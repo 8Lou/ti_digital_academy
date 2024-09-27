@@ -3,26 +3,16 @@ import './header.css';
 import Logo from '../logo/Logo';
 import { useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../../assets/img/Cart.svg';
-import {  useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../../types'; 
 import { selectTotalCartQuantity } from '../../store/selectors';
-import { selectCart } from '../../store/selectors';
 import { useGetCurrentUserQuery } from '../../store/api';
 import { fetchCart } from '../../store/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
 
-interface HeaderProps {
-  user: {
-    firstName: string;
-    lastName: string;
-  } | null;
-  cart: ReturnType<typeof selectCart> | null;
-}
-
-const Header: React.FC<HeaderProps> = ({ cart }) => {
+const Header = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {  loading } = useSelector((state: RootState) => state.cart);
-  const totalQuantity = useSelector(selectTotalCartQuantity);
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state) => state.cart);
+  const totalQuantity = useAppSelector(selectTotalCartQuantity);
   const { data: user } = useGetCurrentUserQuery('userId')
 
   useEffect(() => {

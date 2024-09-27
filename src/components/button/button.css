@@ -22,6 +22,6 @@ button:hover {
 }
 
 .button--disabled {
-  background-color: var(--color-button-background-default);
+  background-color: var(--color-button-background-disabled);
   pointer-events: none;
 }

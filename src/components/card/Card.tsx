@@ -3,52 +3,48 @@ import './card.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
 import { Product } from '../../../types';
-import { useSelector } from 'react-redux';
 import { selectProductInCart } from '../../store/selectors';
+import { RootState } from '../../store';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
+import { addProductToCard, updateCartQuantity } from '../../store/cartSlice';
 
 
 interface CardProps {
     product: Product,
-    cart: { [key: number]: number } | null;
-    setCart: React.Dispatch<React.SetStateAction<{ [key: number]: number | undefined }>>;
 }
 
-const Card: React.FC<CardProps> = ({ product, setCart }) => {
-
+const Card: React.FC<CardProps> = ({ product }) => {
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { cart } = useSelector((state: RootState) => state.cart);
-    const { id, title, thumbnail, price, discountPercentage } = product;
-    const productInCart = useSelector((state) => selectProductInCart(state, id));
-    const quantity = productInCart?.quantity || (cart && cart[id]) || 0;
+    const { cart } = useAppSelector((state: RootState) => state.cart);
+    const { id, title, thumbnail, price, discountPercentage, stock } = product;
+    const productInCart = useAppSelector((state: RootState) => selectProductInCart(state, id));
+    const quantity = productInCart?.quantity || 0;
     const newPrice = price - (price * discountPercentage / 100);
-
+    
     const handleIncrement = () => {
-        setCart((prevCart) => ({
-            ...prevCart,
-            [id]: (prevCart[id] || 0) + 1,
-        }));
+        const newQuantity = quantity + 1;
+        if (cart) {
+            handleUpdateQuantity(cart.id, id, newQuantity);
+        }
     };
 
     const handleDecrement = () => {
-        setCart((prevCart) => {
-            const newQuantity = (prevCart[id] || 0) - 1;
-            if (newQuantity <= 0) {
-                const { [id]: _, ...rest } = prevCart;
-                return rest;
-            } else {
-                return {
-                    ...prevCart,
-                    [id]: newQuantity,
-                };
-            }
-        });
+        const newQuantity = quantity - 1;
+
+        if (cart) {
+            handleUpdateQuantity(cart.id, id, newQuantity);
+        }
     };
 
-    const handleClick = () => {
-        setCart((prevCart) => ({
-            ...prevCart,
-            [id]: (prevCart[id] || 0) + 1,
-        }));
+    const handleAddToCart = () => {
+        if (cart) {
+            dispatch(addProductToCard({ cartId: cart.id, productId: id }))
+        }
+    };
+
+    const handleUpdateQuantity = (cartId: number, productId: number, quantity: number) => {
+        dispatch(updateCartQuantity({ cartId, productId, quantity }));
     };
 
     const handleImageClick = () => {
@@ -68,23 +64,21 @@ const Card: React.FC<CardProps> = ({ product, setCart }) => {
                     <p className='price'>{newPrice.toFixed(2)}</p>
                 </div>
 
-
                 {quantity > 0 ? (
                     <div className="buttons__container">
                         <Button className="button__cart-minus cart__button" onClick={handleDecrement} label={''}>
                             <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
                         </Button>
                         <span className="cart__count">{quantity} {quantity === 1 ? 'item' : 'items'}</span>
-                        <Button className="button__cart-plus" onClick={handleIncrement} label={''}>
+                        <Button className="button__cart-plus" onClick={handleIncrement} label={''} disabled={quantity === stock}>
                             <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
                         </Button>
                     </div>
                 ) : (
-                    <Button className='cart__button' onClick={handleClick} label={''}>
+                    <Button className='cart__button' onClick={handleAddToCart} label={''}>
                         <img src="src/assets/img/Cart.svg" alt="Кнопка Корзина" />
                     </Button>
                 )}
-                {quantity > 0}
             </div>
         </div>
     );

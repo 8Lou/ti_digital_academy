@@ -1,8 +1,6 @@
-import { RootState } from '../../types';
+import { RootState } from './index';
 
 export const selectCart = (state: RootState) => state.cart.cart;
-
-export const selectUser = (state: RootState) => state.userId.user;
 
 export const selectProductInCart = (state: RootState, productId: number) => {
   return state.cart.cart?.products.find((product) => product.id === productId);

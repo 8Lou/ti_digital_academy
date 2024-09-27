@@ -9,11 +9,11 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, onClick, disabled, type = 'button', children, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({ label, onClick, className, disabled, type = 'button', children, ...rest }) => {
   return (
     <button
       type={type}
-      className={`button ${disabled ? 'button--disabled' : ''}`}
+      className={`button ${className} ${disabled ? 'button--disabled' : ''}`}
       onClick={!disabled ? onClick : undefined}
       disabled={disabled}
       {...rest}

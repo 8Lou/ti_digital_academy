@@ -7,8 +7,7 @@ const MyCart: React.FC = () => {
   usePageTitle('My cart | Goods4you');
   return (
     <div>
-      {/* <Basket /> */}
-      <Basket cart={undefined} />
+      <Basket />
       </div>
   );
 };

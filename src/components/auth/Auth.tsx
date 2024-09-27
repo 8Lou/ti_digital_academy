@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useLoginMutation } from '../../store/api';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import './auth.css';
 import usePageTitle from '../../hooks/usePageTitle';
 import { jwtDecode } from 'jwt-decode';
 import Layout from '../layout/Layout';
+import { fetchCart } from '../../store/cartSlice';
 
 const Auth: React.FC = () => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [login, { data, isLoading, error }] = useLoginMutation();
@@ -55,22 +58,24 @@ const Auth: React.FC = () => {
   useEffect(() => {
     if (data?.accessToken) {
       localStorage.setItem('token', data.accessToken);
+      const decodedToken = jwtDecode<{ userId: number }>(data.accessToken);
+      // console.log('Decoded Token:', decodedToken);
 
-      const decodedToken = jwtDecode<{ userId: string }>(data.accessToken);
-      localStorage.setItem('userId', decodedToken.userId);
+      const userId = decodedToken.id; // Взять id из декодированного токена
 
-      navigate('/');
+      if (userId) {
+        localStorage.setItem('userId', userId.toString()); // Сохр userId как строку
+        dispatch(fetchCart(userId));
+        navigate('/');
+      } else {
+        console.error('userId не найден в токене');
+      }
     }
-  }, [data, navigate]);
-
+  }, [data, navigate, dispatch]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    login(JSON.stringify({
-      username,
-      password,
-      expiresInMins: 30,
-    }))
+    await login({ username, password, expiresInMins: 30 });
   };
 
   return (

@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './shoppingCard.css';
 import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
-import {  useSelector } from 'react-redux';
+import { updateCartQuantity } from '../../store/cartSlice';
+import { useAppDispatch } from '../../hooks/store-hooks';
 
 interface ShoppingCardProps {
-  id: string;
+  id: number;
   title: string;
   description: string;
   price: number;
   discountPercentage: number;
   thumbnail: string;
   quantity: number;
+  cartId: number;
 }
 
 const ShoppingCard: React.FC<ShoppingCardProps> = ({
@@ -21,12 +23,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   discountPercentage,
   thumbnail,
   quantity,
+  cartId,
 }) => {
   const navigate = useNavigate();
-  // const products = useSelector((state) => state.cart.products);
-  
-  const [count, setCount] = useState(0);
-  
+  const dispatch = useAppDispatch();
   const newPrice = price - (price * discountPercentage / 100);
 
   const handleImageClick = () => {
@@ -34,22 +34,27 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   };
 
   const handleIncrement = () => {
-    setCount(count + 1);
-  };
+    const newQuantity = quantity + 1;
+    handleUpdateQuantity(cartId, id, newQuantity);
+};
 
   const handleDecrement = () => {
-    if (count > 0) {
-      setCount(count - 1);
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      handleUpdateQuantity(cartId, id, newQuantity);
     }
   };
 
   const handleAddToCart = () => {
-    console.log(`Добавлено ${count + 1} товара(ов) ${title}`);
-    setCount(0);
+    handleUpdateQuantity(cartId, id, 1);
   };
 
-    const handleDelete = () => {
-    setCount(0);
+  const handleDelete = () => {
+    handleUpdateQuantity(cartId, id, 0);
+  };
+
+  const handleUpdateQuantity = (cartId: number, productId: number, quantity: number) => {
+    dispatch(updateCartQuantity({ cartId, productId, quantity }));
   };
 
   return (
