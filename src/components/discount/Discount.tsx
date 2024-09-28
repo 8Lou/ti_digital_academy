@@ -4,26 +4,24 @@ import Button from '../button/Button';
 import Plus from '../../assets/img/Cart-plus.svg';
 import Minus from '../../assets/img/Cart-minus.svg';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../types';
+import { RootState } from '../../store/index';
 import { selectProductInCart } from '../../store/selectors';
 import { updateCartQuantity, addProductToCard } from '../../store/cartSlice';
 import { useAppDispatch } from '../../hooks/store-hooks';
 
 interface DiscountProps {
-  id: number;
   productId: number;
   price: number;
   discountPercentage: number;
-  cartId: number;
+  newPrice: number;
+  stock: number;
 }
 
-const Discount: React.FC<DiscountProps> = ({ productId, price, discountPercentage, cartId }) => {
+const Discount: React.FC<DiscountProps> = ({ productId, price, discountPercentage, stock, newPrice }) => {
   const dispatch = useAppDispatch();
-
   const cart = useSelector((state: RootState) => state.cart.cart);
   const productInCart = useSelector((state: RootState) => selectProductInCart(state, productId));
   const quantity = productInCart?.quantity || 0;
-  const newPrice = price - (price * discountPercentage / 100);
 
   const handleUpdateQuantity = (newQuantity: number) => {
     if (cart && cart.id) {
@@ -75,7 +73,7 @@ const Discount: React.FC<DiscountProps> = ({ productId, price, discountPercentag
             <img src={Minus} alt="Минус" />
           </Button>
           <span className="cart__count">{quantity} {quantity === 1 ? 'item' : 'items'}</span>
-          <Button className="button__cart-plus" onClick={handleIncrement} label="">
+          <Button className="button__cart-plus" onClick={handleIncrement} label="" disabled={quantity === stock}>
             <img src={Plus} alt="Плюс" />
           </Button>
         </div>

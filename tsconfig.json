@@ -7,6 +7,7 @@
   // "extends": "./node_modules/@storybook/react/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
+    "moduleResolution": "Node",
     "module": "ESNext",
     "target": "ESNext",
   },

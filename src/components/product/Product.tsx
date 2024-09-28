@@ -5,7 +5,6 @@ import inactiveStarIcon from '../../assets/img/StarRed.svg';
 import Discount from '../discount/Discount';
 import Layout from '../layout/Layout';
 import { useParams, useNavigate } from 'react-router-dom';
-import {  useAppSelector } from '../../hooks/store-hooks';
 
 interface ProductData {
   id: number;
@@ -30,8 +29,6 @@ const Product: React.FC = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
-  const cart = useAppSelector(state => state.cart.cart);
-  const productInCart = cart?.products.find((product) => product.id === product.id);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -49,8 +46,8 @@ const Product: React.FC = () => {
           setSelectedImage(data.images[0]);
         }
       } catch (error) {
-        console.error('Error fetching the product data:', error);
-        setError(error);
+        console.error('Error fetching the product data:');
+        setError(new Error('Error fetching the product data'));
       } finally {
         setLoading(false);
       }
@@ -138,8 +135,13 @@ const Product: React.FC = () => {
             ))}
           </div>
           <h5 className="one__product-ships">Price: ${product.price}</h5>
-          <Discount price={product.price} productId={product.id} discountPercentage={product.discountPercentage} quantity={productInCart?.quantity || 0}
-newPrice={newPrice} />
+          <Discount
+            price={product.price}
+            productId={product.id}
+            discountPercentage={product.discountPercentage}
+            newPrice={newPrice}
+            stock={product.stock}
+          />
         </div>
       </div>
     </Layout>
