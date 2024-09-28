@@ -5,9 +5,9 @@ import usePageTitle from '../../hooks/usePageTitle';
 const OneProduct: React.FC = () => {
   usePageTitle('Essence Mascara Lash Princess | Goods4you');
   return (
-    <div>
+    <>
       <Product />
-      </div>
+    </>
   );
 };
 export default OneProduct;

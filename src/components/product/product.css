@@ -87,7 +87,7 @@ padding-top: 4px;
 padding-top: 4px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
   .one__product-content {
     grid-template-columns: 1fr;
   }

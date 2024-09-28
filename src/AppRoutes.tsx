@@ -17,7 +17,7 @@ function AppRoutes() {
   const cart = useSelector(selectCart);
   const navigate = useNavigate();
   const userId = localStorage.getItem('userId');
-  const { data, error, isLoading } = useGetCurrentUserQuery(userId)
+  const { data, isLoading } = useGetCurrentUserQuery(userId)
   const token = localStorage.getItem('token');
 
     useEffect(() => {
@@ -38,7 +38,12 @@ function AppRoutes() {
     }
 }, [data, navigate, token]);
 
-  if (isLoading) return <div className="loader"></div>;
+  if (isLoading) 
+    return 
+    <div>
+      <div className="loader"></div>;
+      <h2 className='loader__massege'>Данные устарели, перезагрузите пожалуйста страницу...</h2>
+    </div>
 
     return (
         <>

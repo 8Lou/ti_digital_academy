@@ -5,6 +5,7 @@
   gap: 30px;
   padding: 115px 130px; 
   background-color: var(--color-background-primary);
+  width: 100vw;
 }
 
 .baner__title {

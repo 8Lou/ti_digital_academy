@@ -39,7 +39,12 @@ const Auth: React.FC = () => {
     await login({ username, password, expiresInMins: 30 });
   };
 
-  if (isLoading) return <div className="loader"></div>;
+  if (isLoading) 
+  return 
+  <div>
+    <div className="loader"></div>;
+    <h2 className='loader__massege'>Данные устарели, перезагрузите пожалуйста страницу...</h2>
+  </div>
 
   return (
     <Layout>
@@ -47,22 +52,22 @@ const Auth: React.FC = () => {
       <div className="login__container">
         <h2 className='auth__title'>Sign in</h2>
         <form onSubmit={handleSubmit} className='auth__form'>
-            <input
-              type="text"
-              id="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              placeholder='Login'
-            />
-            <input className='auth__input'
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder='Password'
-            />
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder='Login'
+          />
+          <input className='auth__input'
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder='Password'
+          />
           <button type="submit" disabled={isLoading} className='auth__button'>
             {isLoading ? 'Loading...' : 'Sign in'}
           </button>

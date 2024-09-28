@@ -1,32 +1,13 @@
 .layout {
-    display: flex;
-    flex-direction: column;
-    padding: 3rem 8.12rem;
-    min-width: 1440px; 
-    width: 100%;
-    background-color: var(--color-link-primary);
-  }
-  
-  @media (max-width: 1025px) {
-      .main {
-          min-width: 100vw;
-        }
-        .block__midle {
-            padding: 48px 90px;
-        }
-        .card__grid {
-            grid-gap: 25px;
-        }
-    }
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 8.12rem;
+  width: 100%;
+  background-color: var(--color-link-primary);
+}
 
-    @media (max-width: 768px) {
-      .main {
-        min-width: 100vw;
-      }
-      .card__grid {
-        grid-gap: 20px;
-      }
-      .block__down {
-        width: 90%;
-      }
-    }
+@media (max-width: 768px) {
+  .layout {
+    padding: 3rem 3rem;
+  }
+}
