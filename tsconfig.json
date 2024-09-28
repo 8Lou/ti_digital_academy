@@ -4,7 +4,7 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "extends": "./node_modules/@storybook/react/tsconfig.json",
+  // "extends": "./node_modules/@storybook/react/tsconfig.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "module": "ESNext",
