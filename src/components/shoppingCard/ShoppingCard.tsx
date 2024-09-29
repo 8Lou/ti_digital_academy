@@ -4,6 +4,7 @@ import Button from '../button/Button';
 import { useNavigate } from 'react-router-dom';
 import { updateCartQuantity } from '../../store/cartSlice';
 import { useAppDispatch } from '../../hooks/store-hooks';
+import { useGetProductByIdQuery } from '../../store/api';
 
 interface ShoppingCardProps {
   id: number;
@@ -28,7 +29,10 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const newPrice = price - (price * discountPercentage / 100);
+  const { data: product } = useGetProductByIdQuery(id);
+  const stock = product?.stock || 0;  
 
+  
   const handleImageClick = () => {
     navigate(`/product/${id}`);
   };
@@ -81,7 +85,7 @@ const ShoppingCard: React.FC<ShoppingCardProps> = ({
               <img src="src/assets/img/Cart-minus.svg" alt="Минус" />
             </Button>
             <span className="cart__count">{quantity} {quantity === 1 ? 'item' : 'items'}</span>
-            <Button className="button__cart-plus cart__button" onClick={handleIncrement} label={''}>
+            <Button className="button__cart-plus cart__button" onClick={handleIncrement} label={''} disabled={quantity === stock}>
               <img src="src/assets/img/Cart-plus.svg" alt="Плюс" />
             </Button>
           </div>

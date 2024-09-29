@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Cart } from '../../types';
+import { Cart, Product } from '../../types';
 
 const baseQuery = fetchBaseQuery({
   baseUrl: 'https://dummyjson.com',
@@ -44,13 +44,7 @@ export const api = createApi({
     getCartsByUser: builder.query<Cart, number>({
       query: (userId) => `carts/user/${userId}`,
     }),
-    addCart: builder.mutation<Cart, number>({
-      query: (body) => ({
-        url: 'carts/add',
-        method: 'POST',
-        body,
-      }),
-    }),
+
     updateCart: builder.mutation<Cart, { id: number; body: Partial<Cart> }>({
       query: ({ id, body }) => ({
         url: `carts/${id}`,
@@ -58,12 +52,10 @@ export const api = createApi({
         body,
       }),
     }),
-    deleteCart: builder.mutation<Cart, number>({
-      query: (id) => ({
-        url: `carts/${id}`,
-        method: 'DELETE',
+      getProductById: builder.query<Product, number>({
+        query: (id) => `/products/${id}`,
       }),
-    }),
+      
   }),
 });
 
@@ -71,9 +63,8 @@ export const {
   useGetCartsByUserQuery,
   useGetAllCartsQuery,
   useGetCartByIdQuery,
-  useAddCartMutation,
   useUpdateCartMutation,
-  useDeleteCartMutation,
   useLoginMutation,
   useGetCurrentUserQuery,
+  useGetProductByIdQuery,
 } = api;
