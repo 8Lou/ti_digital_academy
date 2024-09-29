@@ -7,7 +7,6 @@
     background-color: var(--color-text-primary);
     height: 6rem;
     min-width: 100%;
-    position: fixed;
     padding: 0 130px;
     bottom: 0;
     z-index: 2;

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/home';
 import OneProduct from './pages/oneProduct';
 import Undefined from './pages/404';
@@ -20,45 +20,44 @@ function AppRoutes() {
   const { data, isLoading } = useGetCurrentUserQuery(userId)
   const token = localStorage.getItem('token');
 
-    useEffect(() => {
-      if (!token) {
-          navigate('/login');
-          return;
-      }
-
-      const decodedToken = jwtDecode<{ exp: number }>(token);
-      if (decodedToken.exp * 1000 < Date.now()) { //срок действия
-          localStorage.removeItem('token');
-          localStorage.removeItem('userId');
-          navigate('/login');
-          return;
-      }
-      if (data) {
-        setCurrentUser(data);
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+      return;
     }
-}, [data, navigate, token]);
 
-  if (isLoading) 
-    return 
-    <div>
-      <div className="loader"></div>;
-      <h2 className='loader__massege'>Данные устарели, перезагрузите пожалуйста страницу...</h2>
-    </div>
+    const decodedToken = jwtDecode<{ exp: number }>(token);
+    if (decodedToken.exp * 1000 < Date.now()) { //срок действия
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      navigate('/login');
+      return;
+    }
+    if (data) {
+      setCurrentUser(data);
+    }
+  }, [data, navigate, token]);
 
-    return (
-        <>
-            <Header user={currentUser} cart={cart} />
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/product/:id" element={<OneProduct />} />
-                <Route path="/basket" element={<MyCart />} />
-                <Route path="/undefined" element={<Undefined />} />
-                <Route path="*" element={<Navigate to="/404" />} />
-            </Routes>
-            <Footer />
-        </>
-    );
+  if (isLoading)
+    return
+  <div>
+    <div className="loader"></div>;
+    <h2 className='loader__massege'>Данные устарели, перезагрузите пожалуйста страницу...</h2>
+  </div>
+
+  return (
+    <>
+      <Header user={currentUser} cart={cart} isLoginPage={window.location.pathname === '/login'}  />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<OneProduct />} />
+        <Route path="/basket" element={<MyCart />} />
+        <Route path="*" element={<Undefined />} />
+      </Routes>
+      <Footer />
+    </>
+  );
 }
 
 export default AppRoutes;

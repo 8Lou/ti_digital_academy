@@ -38,7 +38,7 @@ const FAQ: React.FC = () => {
   
   return (
     <div className='faq'>
-      <h1 className='faq__title'>FAQ</h1>
+      <h1 className='faq__title' id="faq">FAQ</h1>
       {accordionData.map((item, index) => (
         <div key={index} className='faq__item item'>
           <div className='faq__header' onClick={() => toggleAccordion(index)}>
