@@ -1,0 +1,25 @@
+.accordion {
+    margin: 20px 0;
+  }
+  
+  .accordion__item {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+  
+  .accordion__header {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accordion__answer {
+    padding: 10px;
+    display: none;
+  }
+  
+  .accordion__answer.expanded {
+    display: block;
+  }  

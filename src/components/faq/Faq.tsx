@@ -24,20 +24,13 @@ const accordionData: AccordionItem[] = [
 ];
 
 const FAQ: React.FC = () => {
-  // const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const [openIndexes, setOpenIndexes] = useState<number[]>([]); 
 
-  // const toggleAccordion = (index: number) => {
-  //   setOpenIndex(openIndex === index ? null : index);
-  // };
-
   const toggleAccordion = (index: number) => {
     if (openIndexes.includes(index)) {
-      // Если этот аккордеон уже открыт, закрыть его
       setOpenIndexes(openIndexes.filter(i => i !== index));
     } else {
-      // Иначе добавляем его в список открытых
       setOpenIndexes([...openIndexes, index]);
     }
   };
@@ -45,7 +38,7 @@ const FAQ: React.FC = () => {
   
   return (
     <div className='faq'>
-      <h1 className='faq__title'>FAQ</h1>
+      <h1 className='faq__title' id="faq">FAQ</h1>
       {accordionData.map((item, index) => (
         <div key={index} className='faq__item item'>
           <div className='faq__header' onClick={() => toggleAccordion(index)}>

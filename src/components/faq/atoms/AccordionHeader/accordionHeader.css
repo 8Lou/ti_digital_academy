@@ -1,0 +1,7 @@
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+  }  
