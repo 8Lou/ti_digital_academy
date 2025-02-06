@@ -3,6 +3,8 @@
     height: 100%;
     background-color: var(--color-background-primary);
     padding-top: 4%;
+    height: 100vh;
+    min-width: 100%;
 }
 
 .page__404-svg {

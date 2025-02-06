@@ -1,64 +1,59 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './header.css';
 import Logo from '../logo/Logo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../../assets/img/Cart.svg';
-import bagIcon from '../../assets/img/bage.svg';
+import { selectTotalCartQuantity } from '../../store/selectors';
+import { useGetCurrentUserQuery } from '../../store/api';
+import { fetchCart } from '../../store/cartSlice';
+import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks';
 
+const Header = ({ isLoginPage }) => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state) => state.cart);
+  const totalQuantity = useAppSelector(selectTotalCartQuantity);
+  const { data: user } = useGetCurrentUserQuery('userId')
 
-const Header: React.FC = () => {
-  const navigate = useNavigate(); 
+  useEffect(() => {
+    if (user) {
+      dispatch(fetchCart(user.id));
+    }
+  }, [user, dispatch]);
 
   const handleCartClick = () => {
-    navigate('/cart'); 
-  };
-
-  const handleCatalogClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    navigate('/');
-
-    setTimeout(() => {
-      const element = document.getElementById('catalog');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' }); 
-      }
-    }, 100); 
-  };
-  
-  const handleFaqClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    navigate('/');
-    
-    setTimeout(() => {
-      const element = document.getElementById('faq');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' }); 
-      }
-    }, 100); 
-  };
-  
-  const handleUserClick = () => {
-    navigate('/undefined'); 
+    navigate('/basket');
   };
 
   return (
     <header className="header">
       <div className="header__content">
         <Logo />
-        <nav className="header__nav">
-          <a href="/" onClick={handleCatalogClick} >Catalog</a>
-          <a href="/" onClick={handleFaqClick} >FAQ</a>
-          <a href="#services" className="cart-link" onClick={handleCartClick}>
-            Cart
-            <span className="cart-badge"></span>
-            <span className="cart-icon">
-              <img src={cartIcon} className='menu__cart-svg' alt='Иконка корзины' />
-              <img src={bagIcon} className='menu__bage-svg' alt="Иконка бэйджа" />
-            </span>
-          </a>
-          <a href="/undefined" onClick={handleUserClick} >Johnson Smith</a>
-        </nav>
+        {!isLoginPage && (
+          <nav className="header__nav">
+            <Link to="/" onClick={() => document.getElementById('catalog')?.scrollIntoView({ behavior: 'smooth' })}>Catalog</Link>
+            <Link to="/" onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' })}>FAQ</Link>
+            <Link to="/basket" className="cart-link" onClick={handleCartClick}>
+              Cart
+              {!loading && totalQuantity > 0 && (
+                <span className="cart__badge">{totalQuantity}</span>
+              )}
+              <span className="cart-icon">
+                <img src={cartIcon} className='menu__cart-svg' alt='Иконка корзины' />
+              </span>
+            </Link>
+            {user ? (
+              <span>
+                {user.firstName} {user.lastName}
+              </span>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+          </nav>
+        )}
       </div>
     </header>
   );
-};export default Header;
+};
+
+export default Header;

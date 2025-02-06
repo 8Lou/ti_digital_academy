@@ -3,5 +3,16 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "extends": "./node_modules/@storybook/react/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "moduleResolution": "Node",
+    "module": "ESNext",
+    "target": "ESNext"
+  },
+  "include": [
+    "src/**/*",
+    ".storybook/**/*",
+     "types.ts"  ]
 }

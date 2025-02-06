@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  padding: 6rem 8.12rem;
+  width: 100%;
+  background-color: var(--color-link-primary);
+  min-height: calc(100vh - 6rem);
+}
+
+@media (max-width: 768px) {
+  .layout {
+    padding: 4rem 3rem;
+  }
+}

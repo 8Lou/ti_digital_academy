@@ -1,0 +1,9 @@
+.footer {
+    padding: 20px;
+    background-color: #f8f9fa;
+    text-align: center;
+  }
+  
+  .footer__nav {
+    margin-top: 10px;
+  }  

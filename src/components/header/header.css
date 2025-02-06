@@ -1,7 +1,7 @@
 /* header.css */
 .header {
   display: flex;
-  color: var(--color-text-primary);
+  color: var(--color-link-primary);
   background-color: var(--color-background-primary);
   height: 5.9rem;
   min-width: 100%;
@@ -40,6 +40,7 @@ a {
   position: relative;
   display: inline-block;
   margin-right: 27px;
+  color: var(--color-link-primary);
 }
 
 .menu__cart-svg {
@@ -52,10 +53,16 @@ a {
   height: 20px;
 }
 
-.menu__bage-svg {
+  .cart__badge{
   margin-left: 16px;
-  bottom: -4px;
   position: absolute;
+  background-color: var(--color-button-background-active);
+  color: var(--color-link-primary);
+  border-radius: 50%;
+  padding: 2px 5px;
+  font-size: 12px;
+  font-weight: bold;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {

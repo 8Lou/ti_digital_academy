@@ -3,8 +3,10 @@
   display: flex;
   flex-direction: column;
   padding: 68px 0;
-  max-width: 880px;
-  width: 100%;
+  width: 100vw;
+  padding: 68px 280px 160px;
+  color: var(--color-link-primary);
+  background-color: var(--color-background-primary);
 }
 
 .faq__title {
@@ -60,8 +62,10 @@
   line-height: 1.9;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px), (max-width: 980px) {
   .faq {
     height: fit-content;
+    width: 100vw;
+    padding: 68px 40px 160px;
   }
 }
